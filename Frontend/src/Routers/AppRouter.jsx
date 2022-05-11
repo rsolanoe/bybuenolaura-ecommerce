@@ -1,5 +1,4 @@
 import { Routes, Route, BrowserRouter } from "react-router-dom";
-import Navbar from "../components/Navbar";
 import Cart from "../pages/Cart";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
@@ -12,11 +11,11 @@ const AppRouter = () => {
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route path='/productlist' element={<ProductList />} />
-        <Route path='/product' element={<Product />} />
+        <Route path='/products/:category' element={<ProductList />} /> //TODO error en consola
+        <Route path='/product/:id' element={<Product />} />
+        <Route path='/cart' element={<Cart />} />
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
-        <Route path='/cart' element={<Cart />} />
       </Routes>
     </BrowserRouter>
   )
