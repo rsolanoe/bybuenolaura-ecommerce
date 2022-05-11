@@ -1,38 +1,38 @@
-import styled from "styled-components"
+import styled from "styled-components";
 import { BsCartPlus, BsSearch, BsHeart } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AppContext } from "../context/AppContext";
 
+const Product = ({ item }) => {
+    const context = useContext(AppContext);
 
-const Product = ({item}) => {
-
-    const context = useContext(AppContext)
-
-    const {addCart, setAddCart} = context
+    const { addCart, setAddCart } = context;
 
     const handleClick = () => {
-        setAddCart([...addCart, item])
-    }
+        setAddCart([...addCart, item]);
+    };
 
     return (
         <Container>
-            <Circle/>
+            <Circle />
             <img src={item.img} />
             <Info>
                 <Icon>
                     <BsCartPlus onClick={handleClick} />
                 </Icon>
-                <Icon>
-                    <BsSearch />
-                </Icon>
+                <Link to={`/product/${item._id}`}>
+                    <Icon>
+                        <BsSearch />
+                    </Icon>
+                </Link>
                 <Icon>
                     <BsHeart />
                 </Icon>
             </Info>
         </Container>
-    )
-}
+    );
+};
 
 const Circle = styled.div`
     width: 200px;
@@ -40,7 +40,7 @@ const Circle = styled.div`
     border-radius: 50%;
     background-color: white;
     position: absolute;
-`
+`;
 
 const Info = styled.div`
     opacity: 0;
@@ -49,7 +49,7 @@ const Info = styled.div`
     position: absolute;
     top: 0;
     left: 0;
-    background-color: rgba(0,0,0,0.2);
+    background-color: rgba(0, 0, 0, 0.2);
     z-index: 3;
     display: flex;
     align-items: center;
@@ -57,14 +57,15 @@ const Info = styled.div`
     gap: 1rem;
     transition: all 0.3s ease;
 
-    &:hover{
+    &:hover {
         opacity: 1;
     }
 
-    svg{
+    svg {
         font-size: 1.5rem;
+        color: black;
     }
-`
+`;
 
 const Icon = styled.div`
     width: 40px;
@@ -76,12 +77,11 @@ const Icon = styled.div`
     justify-content: center;
     transition: all 0.2s ease;
 
-    &:hover{
+    &:hover {
         background-color: #b2fcfc;
         transform: scale(1.2);
     }
-`
-
+`;
 
 const Container = styled.div`
     position: relative;
@@ -100,6 +100,6 @@ const Container = styled.div`
         height: 75%;
         z-index: 2;
     }
-`
+`;
 
-export default Product
+export default Product;

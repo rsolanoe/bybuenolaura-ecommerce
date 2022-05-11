@@ -9,45 +9,41 @@ import { useState } from "react";
 
 const ProductList = () => {
     //* Tiene el mismo resultado que useParams()
-   /*  const {pathname} = useLocation();
+    /*  const {pathname} = useLocation();
     console.log(pathname.split('/')[2]); */
-    
-    const {category} = useParams()
 
-    const [filters, setFilters] = useState({})
-    const [sort, setSort] = useState('newest')
+    const { category } = useParams();
 
-    const handleFIlter = ({target}) => {
+    const [filters, setFilters] = useState({});
+    const [sort, setSort] = useState("newest");
+
+    const handleFIlter = ({ target }) => {
         const value = target.value;
         setFilters({
             ...filters,
-            [target.name]: value
-        })
-    }
+            [target.name]: value,
+        });
+    };
 
     return (
         <Container>
             <Announcement />
             <Navbar />
-            <Title>Dresses</Title>
+            <Title>{category}</Title>
             <FilterContainer>
                 <Filter>
                     <FilterText>Filter Products:</FilterText>
-                    <Select name='color' onChange={handleFIlter}>
-                        <Option disabled>
-                            Color
-                        </Option>
-                        <Option>White</Option>
-                        <Option>Black</Option>
-                        <Option>Red</Option>
-                        <Option>Blue</Option>
-                        <Option>Yellow</Option>
-                        <Option>Green</Option>
+                    <Select name="color" onChange={handleFIlter}>
+                        <Option disabled>Color</Option>
+                        <Option>white</Option>
+                        <Option>black</Option>
+                        <Option>red</Option>
+                        <Option>blue</Option>
+                        <Option>yellow</Option>
+                        <Option>green</Option>
                     </Select>
-                    <Select name='size' onChange={handleFIlter}>
-                        <Option disabled>
-                            Size
-                        </Option>
+                    <Select name="size" onChange={handleFIlter}>
+                        <Option disabled>Size</Option>
                         <Option>XS</Option>
                         <Option>S</Option>
                         <Option>M</Option>
@@ -57,14 +53,14 @@ const ProductList = () => {
                 </Filter>
                 <Filter>
                     <FilterText>Sort Products:</FilterText>
-                    <Select onChange={e => setSort(e.target.value)}>
-                        <Option value='newest'>Newest</Option>
-                        <Option value='asc'>Price (asc)</Option>
-                        <Option value='desc'>Price (desc)</Option>
+                    <Select onChange={(e) => setSort(e.target.value)}>
+                        <Option value="newest">Newest</Option>
+                        <Option value="asc">Price (asc)</Option>
+                        <Option value="desc">Price (desc)</Option>
                     </Select>
                 </Filter>
             </FilterContainer>
-            <Products cat={category} filters={filters} sort={sort}/>
+            <Products cat={category} filters={filters} sort={sort} />
             <Newsletter />
             <Footer />
         </Container>

@@ -39,7 +39,7 @@ router.delete("/:id", verifyTokenAndAdmin, async (req, res) => {
         await Order.findByIdAndDelete(req.params.id);
         res.status(200).json("Order has been deleted...");
     } catch (error) {
-        res.status(500).json(err);
+        res.status(500).json(error);
     }
 });
 
@@ -49,7 +49,7 @@ router.get("/find/:userid", verifyTokenAndAuthorization, async (req, res) => {
         const orders = await Order.find({ userID: req.params.id });
         res.status(200).json(orders);
     } catch (error) {
-        res.status(500).json(err);
+        res.status(500).json(error);
     }
 });
 
@@ -59,7 +59,7 @@ router.get("/", verifyTokenAndAdmin, async (req, res) => {
         const orders = await Order.find();
         res.status(200).json(orders);
     } catch (error) {
-        res.status(500).json(err);
+        res.status(500).json(error);
     }
 });
 

@@ -38,7 +38,7 @@ router.delete("/:id", verifyTokenAndAdmin, async (req, res) => {
         await Product.findByIdAndDelete(req.params.id);
         res.status(200).json("Producut has been deleted...");
     } catch (error) {
-        res.status(500).json(err);
+        res.status(500).json(error);
     }
 });
 
@@ -48,12 +48,13 @@ router.get("/find/:id", async (req, res) => {
         const product = await Product.findById(req.params.id);
         res.status(200).json(product);
     } catch (error) {
-        res.status(500).json(err);
+        res.status(500).json(error);
     }
 });
 
 //GET ALL PRODUCTS
 router.get("/", async (req, res) => {
+    console.log(req.query)
     const qNew = req.query.new;
     const qCategory = req.query.category;
     try {
@@ -73,7 +74,7 @@ router.get("/", async (req, res) => {
 
         res.status(200).json(products);
     } catch (error) {
-        res.status(500).json(err);
+        res.status(500).json(error);
     }
 });
 

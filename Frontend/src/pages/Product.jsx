@@ -6,11 +6,14 @@ import ProductInfo from "../components/ProductInfo";
 
 
 const Product = () => {
+
+   window.scrollTo(0, 0)
+
    return (
          <>
             <Announcement />
             <Navbar />
-            <ProductInfo/>
+            <ProductInfo />
             <Newsletter />
             <Footer />
          </>
