@@ -8,6 +8,9 @@ import { useLocation, useParams } from "react-router-dom";
 import { useState } from "react";
 
 const ProductList = () => {
+
+    window.scrollTo(0, 0)
+
     //* Tiene el mismo resultado que useParams()
     /*  const {pathname} = useLocation();
     console.log(pathname.split('/')[2]); */

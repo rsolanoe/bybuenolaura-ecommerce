@@ -15,21 +15,27 @@ const Footer = () => {
          <Left>
             <Logo>byBuenoLaura</Logo>
             <Desc>
-               Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi voluptate unde possimus adipisci, laudantium, ipsum officiis nam laborum quas nisi, facilis voluptatem cumque? Assumenda velit fugit eveniet doloribus sint nisi.
+               Soy una mujer Colombiana, con sentimientos, días buenos y días malos como tú. desde muy pequeña trabajo en ventas y desde mis 18 años he trabajado en grandes empresas como L'Oreal, Beiersdorf, Naissant. de todas he aprendido mucho pero sobretodo me he apasionado cada vez más por el cuidado de la piel.
             </Desc>
             <SocialContainer>
-               <SocialIcon color='3B5999'>
-                  <FaFacebookSquare />
-               </SocialIcon>
-               <SocialIcon color='E4405F'>
-                  <FaInstagram />
-               </SocialIcon>
+               <a href="https://www.facebook.com/laura.bueno.58760608">
+                  <SocialIcon color='3B5999'>
+                     <FaFacebookSquare />
+                  </SocialIcon>
+               </a>
+               <a href="https://www.instagram.com/bybuenolaura/">
+                  <SocialIcon color='E4405F'>
+                     <FaInstagram />
+                  </SocialIcon>
+               </a>
                <SocialIcon color='55ACEE'>
                   <FaTwitter />
                </SocialIcon>
-               <SocialIcon color='0a66c2'>
-                  <FaLinkedin />
-               </SocialIcon>
+               <a href="https://www.linkedin.com/in/laura-bueno-de-la-hoz-058b28121/">
+                  <SocialIcon color='0a66c2'>
+                     <FaLinkedin />
+                  </SocialIcon>
+               </a>
             </SocialContainer>
          </Left>
          <Center>
@@ -52,10 +58,10 @@ const Footer = () => {
                <FaMapMarkerAlt /> 9700 NW 112h Ave, Miami, FL 33178
             </ContactItem>
             <ContactItem>
-               <FaPhoneAlt /> +573008602885
+               <FaPhoneAlt /> +573046106261
             </ContactItem>
             <ContactItem>
-               < MdOutlineMail /> contact@bybuenolaura.com.co
+               < MdOutlineMail /> gerencia.bybuenolaura@gmail.com
             </ContactItem>
             <img src="https://i.ibb.co/Qfvn4z6/payment.png" alt="payment methos" />
          </Right>

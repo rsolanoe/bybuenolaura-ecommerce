@@ -1,17 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import './app.css'
-import { AppContext } from "./context/AppContext";
-import Home from "./pages/Home";
 import AppRouter from "./Routers/AppRouter";
+
+import {Provider} from 'react-redux'
+import store from './redux/store';
 
 const App = () => {
 
-   const [addCart, setAddCart] = useState([])
-
    return (
-      <AppContext.Provider value ={{addCart, setAddCart}}>
+      <Provider store={store}>
          <AppRouter />
-      </AppContext.Provider>
+      </Provider>
    );
 };
 

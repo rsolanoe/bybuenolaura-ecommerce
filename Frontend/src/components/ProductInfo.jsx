@@ -2,22 +2,28 @@ import styled from "styled-components";
 import { IoAddSharp, IoRemoveSharp } from "react-icons/io5";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import getProduct from "../helpers/getProduct";
 import axios from "axios";
+import { addProduct } from "../redux/cartSlice";
+import { useDispatch } from "react-redux";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const ProductInfo = () => {
     const { id } = useParams();
     const [product, setProduct] = useState({});
     const [amount, setAmount] = useState(1);
 
+    const dispatch = useDispatch();
+
     console.log(product);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const endpoint = `http://localhost:5000/api/products/find/${id}`;
-                const { data } = await axios(endpoint);
-                console.log(data);
+                const { data } = await axios(
+                    `http://localhost:5000/api/products/find/${id}`
+                );
                 setProduct(data);
             } catch (error) {
                 console.log(error);
@@ -26,23 +32,42 @@ const ProductInfo = () => {
         fetchData();
     }, [id]);
 
+    const handleClick = () => {
+        toast.success(`${product.title} se ha agregado`, {
+            position: "top-right",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+        });
+        dispatch(
+            addProduct({ ...product, quantity: amount })
+        );
+    };
+
     return (
         <Container>
-          {/*   <Wrapper>
+            <Wrapper>
                 <ImgContainer>
                     <img src={product.img} />
                 </ImgContainer>
                 <InfoContainer>
                     <Title>{product.title}</Title>
-                    <Desc>{product.description}</Desc>
+                    <Desc
+                        dangerouslySetInnerHTML={{
+                            __html: product.description,
+                        }}
+                    ></Desc>
                     <Price>$ {product.price}</Price>
                     <FilterContainer>
-                        <Filter>
+                        {/*                <Filter>
                             <FilterTitle>Color</FilterTitle>
                             {product.color?.map((item) => (
                                 <FilterColor key={item} color={item} />
                             ))}
-                        </Filter>
+                        </Filter> */}
                         <Filter>
                             <FilterTitle>Size</FilterTitle>
                             <FilterSize>
@@ -59,6 +84,7 @@ const ProductInfo = () => {
                         <AmountContainer>
                             <IoRemoveSharp
                                 onClick={() =>
+                                    amount > 1 &&
                                     setAmount((preValue) => preValue - 1)
                                 }
                             />
@@ -70,14 +96,14 @@ const ProductInfo = () => {
                             />
                         </AmountContainer>
 
-                        <Button>ADD TO CART</Button>
+                        <Button onClick={handleClick}>ADD TO CART</Button>
                     </AddContainer>
                 </InfoContainer>
-            </Wrapper> */}
+            </Wrapper>
+            <ToastContainer />
         </Container>
     );
 };
-
 
 const Container = styled.div``;
 
@@ -93,7 +119,7 @@ const ImgContainer = styled.div`
     img {
         width: 100%;
         height: 90vh;
-        object-fit: cover;
+        object-fit: contain;
     }
 `;
 
@@ -102,16 +128,29 @@ const InfoContainer = styled.div`
 `;
 
 const Title = styled.h1`
-    font-weight: 200;
+    font-weight: 600;
+    font-size: 1.7rem;
 `;
 
-const Desc = styled.p`
+const Desc = styled.div`
     margin: 20px 0;
+    font-size: 1.2rem;
+
+    h5 {
+        font-size: 1.4rem;
+        margin-bottom: 1rem;
+    }
+
+    li {
+        font-size: 1rem;
+        margin-bottom: 0.2rem;
+        list-style: none;
+    }
 `;
 
 const Price = styled.span`
     font-weight: 100;
-    font-size: 40px;
+    font-size: 2rem;
 `;
 
 const FilterContainer = styled.div`
@@ -152,6 +191,10 @@ const AddContainer = styled.div`
     align-items: center;
     width: 50%;
     justify-content: space-between;
+
+    svg {
+        cursor: pointer;
+    }
 `;
 
 const AmountContainer = styled.div`

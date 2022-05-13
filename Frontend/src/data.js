@@ -24,7 +24,7 @@ export const categories = [
         id: 1,
         img: "https://images.pexels.com/photos/5886041/pexels-photo-5886041.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
         title: "SHIRT STYLE!",
-        category: 'women'
+        category: 'mascarilla'
     },
     {
         id: 2,
@@ -40,61 +40,3 @@ export const categories = [
     },
 ];
 
-export const popularProducts = [
-    {
-        id: 1,
-        img: "https://d3o2e4jr3mxnm3.cloudfront.net/Mens-Jake-Guitar-Vintage-Crusher-Tee_68382_1_lg.png",
-        info: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempora quae cumque, consequuntur possimus nemo recusandae hic neque magnam, vel, omnis fugiat! Illum voluptate adipisci rerum illo, ratione tempore corporis aspernatur eaque voluptas maiores labore laudantium optio veritatis praesentium blanditiis consequatur facilis earum! Voluptatum repudiandae exercitationem ex quisquam dolorum accusantium adipisci quas incidunt ea tempore asperiores modi impedit, rerum et eligendi dolores.',
-        price: 60,
-        name: 'Lorem ipsum dolor sit amet consectetur.'
-    },
-    {
-        id: 2,
-        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/PNG_transparency_demonstration_1.png/300px-PNG_transparency_demonstration_1.png",
-        info: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempora quae cumque, consequuntur possimus nemo recusandae hic neque magnam, vel, omnis fugiat! Illum voluptate adipisci rerum illo, ratione tempore corporis aspernatur eaque voluptas maiores labore laudantium optio veritatis praesentium blanditiis consequatur facilis earum! Voluptatum repudiandae exercitationem ex quisquam dolorum accusantium adipisci quas incidunt ea tempore asperiores modi impedit, rerum et eligendi dolores.',
-        price: 60,
-        name: 'Lorem ipsum dolor sit amet consectetur.'
-    },
-    {
-        id: 3,
-        img: "https://www.prada.com/content/dam/pradanux_products/U/UCS/UCS319/1YOTF010O/UCS319_1YOT_F010O_S_182_SLF.png",
-        info: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempora quae cumque, consequuntur possimus nemo recusandae hic neque magnam, vel, omnis fugiat! Illum voluptate adipisci rerum illo, ratione tempore corporis aspernatur eaque voluptas maiores labore laudantium optio veritatis praesentium blanditiis consequatur facilis earum! Voluptatum repudiandae exercitationem ex quisquam dolorum accusantium adipisci quas incidunt ea tempore asperiores modi impedit, rerum et eligendi dolores.',
-        price: 60,
-        name: 'Lorem ipsum dolor sit amet consectetur.'
-    },
-    {
-        id: 4,
-        img: "https://www.burdastyle.com/pub/media/catalog/product/cache/7bd3727382ce0a860b68816435d76e26/107/BUS-PAT-BURTE-1320516/1170x1470_BS_2016_05_132_front.png",
-        info: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempora quae cumque, consequuntur possimus nemo recusandae hic neque magnam, vel, omnis fugiat! Illum voluptate adipisci rerum illo, ratione tempore corporis aspernatur eaque voluptas maiores labore laudantium optio veritatis praesentium blanditiis consequatur facilis earum! Voluptatum repudiandae exercitationem ex quisquam dolorum accusantium adipisci quas incidunt ea tempore asperiores modi impedit, rerum et eligendi dolores.',
-        price: 60,
-        name: 'Lorem ipsum dolor sit amet consectetur.'
-    },
-    {
-        id: 5,
-        img: "https://images.ctfassets.net/5gvckmvm9289/3BlDoZxSSjqAvv1jBJP7TH/65f9a95484117730ace42abf64e89572/Noissue-x-Creatsy-Tote-Bag-Mockup-Bundle-_4_-2.png",
-        info: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempora quae cumque, consequuntur possimus nemo recusandae hic neque magnam, vel, omnis fugiat! Illum voluptate adipisci rerum illo, ratione tempore corporis aspernatur eaque voluptas maiores labore laudantium optio veritatis praesentium blanditiis consequatur facilis earum! Voluptatum repudiandae exercitationem ex quisquam dolorum accusantium adipisci quas incidunt ea tempore asperiores modi impedit, rerum et eligendi dolores.',
-        price: 60,
-        name: 'Lorem ipsum dolor sit amet consectetur.'
-    },
-    {
-        id: 6,
-        img: "https://d3o2e4jr3mxnm3.cloudfront.net/Rocket-Vintage-Chill-Cap_66374_1_lg.png",
-        info: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempora quae cumque, consequuntur possimus nemo recusandae hic neque magnam, vel, omnis fugiat! Illum voluptate adipisci rerum illo, ratione tempore corporis aspernatur eaque voluptas maiores labore laudantium optio veritatis praesentium blanditiis consequatur facilis earum! Voluptatum repudiandae exercitationem ex quisquam dolorum accusantium adipisci quas incidunt ea tempore asperiores modi impedit, rerum et eligendi dolores.',
-        price: 60,
-        name: 'Lorem ipsum dolor sit amet consectetur.'
-    },
-    {
-        id: 7,
-        img: "http://assets.stickpng.com/thumbs/580b57fbd9996e24bc43bed3.png",
-        info: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempora quae cumque, consequuntur possimus nemo recusandae hic neque magnam, vel, omnis fugiat! Illum voluptate adipisci rerum illo, ratione tempore corporis aspernatur eaque voluptas maiores labore laudantium optio veritatis praesentium blanditiis consequatur facilis earum! Voluptatum repudiandae exercitationem ex quisquam dolorum accusantium adipisci quas incidunt ea tempore asperiores modi impedit, rerum et eligendi dolores.',
-        price: 60,
-        name: 'Lorem ipsum dolor sit amet consectetur.'
-    },
-    {
-        id: 8,
-        img: "https://www.pngarts.com/files/3/Women-Jacket-PNG-High-Quality-Image.png",
-        info: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempora quae cumque, consequuntur possimus nemo recusandae hic neque magnam, vel, omnis fugiat! Illum voluptate adipisci rerum illo, ratione tempore corporis aspernatur eaque voluptas maiores labore laudantium optio veritatis praesentium blanditiis consequatur facilis earum! Voluptatum repudiandae exercitationem ex quisquam dolorum accusantium adipisci quas incidunt ea tempore asperiores modi impedit, rerum et eligendi dolores.',
-        price: 60,
-        name: 'Lorem ipsum dolor sit amet consectetur.'
-    },
-]
