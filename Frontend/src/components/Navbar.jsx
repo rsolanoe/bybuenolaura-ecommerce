@@ -14,6 +14,9 @@ const Navbar = () => {
         <Container>
             <Wrapper>
                 <Left>
+                    <ImgContainer>
+                        <img src="https://res.cloudinary.com/dezaizbpb/image/upload/v1652450221/test/WhatsApp_Image_2022-05-12_at_10.00.12_PM_qng18y.jpg" />
+                    </ImgContainer>
                     <Language>EN</Language>
                     <SearchContainer>
                         <Input />
@@ -70,6 +73,17 @@ const Left = styled.div`
     gap: 5px;
     flex: 1;
 `;
+
+const ImgContainer = styled.div`
+    width: 50px;
+    height: 50px;
+    background-color: red;
+    z-index: 5;
+
+    img {
+        width: 100%;
+    }
+`
 
 const Language = styled.span`
     font-size: 14px;

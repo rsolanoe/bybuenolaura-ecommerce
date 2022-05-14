@@ -64,14 +64,14 @@ const Link = styled.a`
 
 const Login = () => {
 
-    const [username, setUsername] = useState('')
+    const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
     const dispatch = useDispatch();
 
     const handleLogin = (e) => {
         e.preventDefault();
-        login(dispatch, { username, password })
+        login(dispatch, { email, password })
     }
 
     return (
@@ -79,7 +79,7 @@ const Login = () => {
             <Wrapper>
                 <Title>SIGN IN</Title>
                 <Form>
-                    <Input placeholder="username" onChange={({target}) => setUsername(target.value)}/>
+                    <Input type='email' placeholder="email" onChange={({target}) => setEmail(target.value)}/>
                     <Input type='password' placeholder="password" onChange={({target}) => setPassword(target.value)}/>
                     <Button onClick={handleLogin}>LOGIN</Button>
                     <Link>DO NOT YOU REMEMBER THE PASSWORD?</Link>

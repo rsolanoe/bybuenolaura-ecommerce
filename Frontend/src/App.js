@@ -3,13 +3,16 @@ import './app.css'
 import AppRouter from "./Routers/AppRouter";
 
 import {Provider} from 'react-redux'
-import store from './redux/store';
+import { store, persistor } from './redux/store';
+import { PersistGate } from 'redux-persist/integration/react'
 
 const App = () => {
 
    return (
       <Provider store={store}>
-         <AppRouter />
+         <PersistGate loading={null} persistor={persistor}>
+            <AppRouter />
+         </PersistGate>
       </Provider>
    );
 };
