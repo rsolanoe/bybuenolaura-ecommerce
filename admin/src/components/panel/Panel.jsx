@@ -17,6 +17,7 @@ const Panel = () => {
 
 const Container = styled.section`
     flex: 4;
+    padding: 20px;
 `;
 
 export default Panel;

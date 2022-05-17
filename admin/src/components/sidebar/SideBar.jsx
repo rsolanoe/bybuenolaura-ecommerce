@@ -15,6 +15,8 @@ import {
     Report
 } from "@mui/icons-material";
 import BarList from "./BarList";
+import { NavLink } from "react-router-dom";
+
 
 const SideBar = () => {
 
@@ -33,8 +35,12 @@ const SideBar = () => {
                 <SideBarMenu>
                     <SideBarTitle>Quick Menu</SideBarTitle>
                     <SideBarList>
-                        <BarList title={"Users"} icon={<PersonOutlineOutlined />} />
-                        <BarList title={"Products"} icon={<StorefrontOutlined />} />
+                        <SLink to='/user'>
+                            <BarList title={"Users"} icon={<PersonOutlineOutlined />} />
+                        </SLink>
+                        <SLink to='/product'>
+                           <BarList title={"Products"} icon={<StorefrontOutlined />} />
+                        </SLink>
                         <BarList title={"Transactions"} icon={<AttachMoneyOutlined />} />
                         <BarList title={"Reports"} icon={<AssessmentOutlined />} />
                     </SideBarList>
@@ -89,5 +95,14 @@ const SideBarList = styled.ul`
     padding: 5px;
 `;
 
+const SLink = styled(NavLink)`
+    text-decoration: none;
+    color: inherit;
+
+    &.active > li {
+        font-weight: 600;
+        background-color: #97C4B8;
+    }
+`
 
 export default SideBar;

@@ -42,13 +42,13 @@ router.delete("/:id", verifyTokenAndAdmin, async (req, res) => {
     }
 });
 
-//GET PRODUCT
+//GET SINGLE PRODUCT
 router.get("/find/:id", async (req, res) => {
     try {
         const product = await Product.findById(req.params.id);
         res.status(200).json(product);
     } catch (error) {
-        res.status(500).json(error);
+        res.status(404).json(error);
     }
 });
 

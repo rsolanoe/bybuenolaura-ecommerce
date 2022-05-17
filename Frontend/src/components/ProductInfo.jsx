@@ -2,34 +2,25 @@ import styled from "styled-components";
 import { IoAddSharp, IoRemoveSharp } from "react-icons/io5";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import axios from "axios";
 import { addProduct } from "../redux/cartSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { productDetails } from "../redux/apiCalls";
 
 
 const ProductInfo = () => {
     const { id } = useParams();
-    const [product, setProduct] = useState({});
+    // const [product, setProduct] = useState({});
     const [amount, setAmount] = useState(1);
 
     const dispatch = useDispatch();
+    const {product} = useSelector(state => state.productDetail);
 
     console.log(product);
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const { data } = await axios(
-                    `http://localhost:5000/api/products/find/${id}`
-                );
-                setProduct(data);
-            } catch (error) {
-                console.log(error);
-            }
-        };
-        fetchData();
+        productDetails(dispatch, id)
     }, [id]);
 
     const handleClick = () => {

@@ -11,7 +11,6 @@ import PrivateRoute from "./PrivateRoute";
 const AppRouter = () => {
 
     const {currentUser} = useSelector(state => state.user);
-    console.log(!!currentUser);
 
     return (
         <BrowserRouter>

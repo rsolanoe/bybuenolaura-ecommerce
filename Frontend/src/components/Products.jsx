@@ -2,22 +2,20 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import Product from "./Product";
 import getProduct from "../helpers/getProduct";
+import { useDispatch, useSelector } from "react-redux";
+import { getProducts } from "../redux/apiCalls";
+import LoadingSpinner from "./LoadingError/LoadingSpinner";
 
 const Products = ({ cat, filters, sort }) => {
-    const [products, setProducts] = useState([]);
+
+    const dispatch = useDispatch();
+    const {products, isFetching, error} = useSelector(state => state.product);
+
     const [filteredProducts, setfilteredProducts] = useState([]);
 
     useEffect(() => {
-        const getProducts = async () => {
-            try {
-                const data = await getProduct(cat);
-                setProducts(data);
-            } catch (error) {
-                console.log(error);
-            }
-        };
-        getProducts();
-    }, [cat]);
+        getProducts(dispatch, cat)
+    }, [dispatch, cat]);
 
     useEffect(() => {
         cat &&
@@ -30,9 +28,16 @@ const Products = ({ cat, filters, sort }) => {
             );
     }, [cat, filters, products]);
 
+    if (isFetching) {
+        return <LoadingSpinner />
+    }
+
+    if (error) {
+        return <h1>Error...</h1>
+    }
+
     return (
         <Container>
-
             {
                 cat
                     ? filteredProducts.map((item) => (

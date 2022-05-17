@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import styled from 'styled-components'
 import { DataGrid } from '@mui/x-data-grid';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
-import {userRows} from '../dummyData'
+import { productRows } from '../dummyData'
 import { Link } from 'react-router-dom'
 
 
-const UserList = () => {
 
-    const [data, setData] = useState(userRows)
+const ProductList = () => {
+
+    const [data, setData] = useState(productRows)
 
     const handleDelete = (id) => {
         setData(data.filter(item => item.id !== id))
@@ -16,21 +17,21 @@ const UserList = () => {
 
     const columns = [
         { field: 'id', headerName: 'ID', width: 90 },
-        { field: 'user', headerName: 'User', width: 200, renderCell: ({row}) => {
+        { field: 'product', headerName: 'Product', width: 200, renderCell: ({row}) => {
             return (
-                <UserListUser>
-                    <img src={row.avatar} alt="" />
-                    {row.username}
-                </UserListUser>
+                <ProductListItem>
+                    <img src={row.image} alt="" />
+                    {row.name}
+                </ProductListItem>
             )
         } },
-        { field: 'email', headerName: 'Email', width: 200 },
+        { field: 'stock', headerName: 'Stock', width: 200 },
         { field: 'status', headerName: 'Status', width: 120 },
-        { field: 'transaction', headerName: 'Transaction Volume', width: 160 },
+        { field: 'price', headerName: 'Price', width: 160 },
         { field: 'action', headerName: 'Action', width: 150, renderCell: ({row}) => {
             return (
                 <>
-                    <Link to={`/user/${row.id}`}>
+                    <Link to={`/product/${row.id}`}>
                         <Button>Edit</Button>
                     </Link>
                     <DeleteIcon onClick={() => handleDelete(row.id)} />
@@ -38,11 +39,9 @@ const UserList = () => {
             )
         } }
       ];
-      
-      
-      
+
     return (
-        <UserListContainer>
+        <Container>
             <DataGrid
                 rows={data}
                 columns={columns}
@@ -51,23 +50,23 @@ const UserList = () => {
                 checkboxSelection
                 disableSelectionOnClick
             />
-        </UserListContainer>
-    );
-};
+        </Container>
+    )
+}
 
-const UserListContainer = styled.div`
+const Container = styled.div`
     flex: 4;
 `
 
-const UserListUser = styled.div`
+const ProductListItem = styled.div`
     display: flex;
     align-items: center;
     gap: 10px;
-
+    
     img {
         width: 32px;
         height: 32px;
-        border-radius: 50%;
+        //border-radius: 50%;
         object-fit: cover;
     }
 `
@@ -87,4 +86,4 @@ const DeleteIcon = styled(DeleteOutlineIcon)`
     margin-left: 15px;
 `
 
-export default UserList;
+export default ProductList

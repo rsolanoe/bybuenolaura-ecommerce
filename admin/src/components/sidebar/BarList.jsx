@@ -1,8 +1,7 @@
 import styled from "styled-components";
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 const BarList = ({ title, icon }) => {
-
     return (
         <ListItem>
             {icon}
@@ -20,11 +19,10 @@ const ListItem = styled.li`
     transition: all 0.2s ease;
     gap: 7px;
 
-    &.active,
-    &:hover {
+   /*  &:hover {
         background-color: #97C4B8;
         font-weight: 600;
-    }
+    } */
 
     svg {
         font-size: 18px;
