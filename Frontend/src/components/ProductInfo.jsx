@@ -8,6 +8,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { productDetails } from "../redux/apiCalls";
 import LoadingSpinner from "./LoadingError/LoadingSpinner";
+import { mobile } from "../responsive";
 
 
 const ProductInfo = () => {
@@ -62,12 +63,6 @@ const ProductInfo = () => {
                     ></Desc>
                     <Price>$ {product.price}</Price>
                     <FilterContainer>
-                        {/*                <Filter>
-                            <FilterTitle>Color</FilterTitle>
-                            {product.color?.map((item) => (
-                                <FilterColor key={item} color={item} />
-                            ))}
-                        </Filter> */}
                         <Filter>
                             <FilterTitle>Size</FilterTitle>
                             <FilterSize>
@@ -110,6 +105,8 @@ const Container = styled.div``;
 const Wrapper = styled.div`
     display: flex;
     padding: 50px;
+
+    ${mobile({ flexDirection: "column", padding: '10px' })}
 `;
 
 const ImgContainer = styled.div`
@@ -120,11 +117,15 @@ const ImgContainer = styled.div`
         width: 100%;
         height: 90vh;
         object-fit: contain;
+        ${mobile({ height: "40vh" })}
     }
 `;
 
 const InfoContainer = styled.div`
     flex: 1;
+    text-align: justify;
+
+    ${mobile({ padding: "20px" })}
 `;
 
 const Title = styled.h1`
@@ -158,6 +159,7 @@ const FilterContainer = styled.div`
     margin: 30px 0;
     display: flex;
     justify-content: space-between;
+    
 `;
 
 const Filter = styled.div`
@@ -168,15 +170,6 @@ const Filter = styled.div`
 const FilterTitle = styled.span`
     font-style: 20px;
     font-weight: 200;
-`;
-
-const FilterColor = styled.div`
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background-color: ${({ color }) => color};
-    margin: 0 5px;
-    cursor: pointer;
 `;
 
 const FilterSize = styled.select`
@@ -192,6 +185,8 @@ const AddContainer = styled.div`
     width: 50%;
     justify-content: space-between;
 
+    ${mobile({ width: "100%" })}
+
     svg {
         cursor: pointer;
     }
@@ -202,6 +197,8 @@ const AmountContainer = styled.div`
     align-items: center;
     font-weight: 700;
     font-size: 23px;
+    
+    
 `;
 
 const Amount = styled.span`

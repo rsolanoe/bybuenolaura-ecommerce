@@ -1,13 +1,17 @@
-import React, { useContext } from "react";
+import React from "react";
 import styled from "styled-components";
 import { FaSearch } from "react-icons/fa";
 import { BsCart } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { mobile } from "../responsive";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../redux/userSlice";
 
 const Navbar = () => {
     const { quantity } = useSelector((state) => state.persistedReducer.cart);
+
+    const dispatch = useDispatch();
+    const {currentUser} = useSelector(state => state.persistedReducer.user);
 
     return (
         <Container>
@@ -30,12 +34,29 @@ const Navbar = () => {
                 </Center>
 
                 <Right>
-                    <Link to="/register">
+                    {
+                        currentUser
+                        ? (
+                            <MenuItem onClick={()=>dispatch(logout())} >LOGOUT</MenuItem>
+                        )
+                        : (<>
+                            <Link to="/register">
+                                <MenuItem>REGISTER</MenuItem>
+                            </Link>
+                            <Link to="/login">
+                                <MenuItem>SING IN</MenuItem>
+                            </Link>
+                        </>
+                        )
+                    }
+
+                    {/* <Link to="/register">-------------------------
                         <MenuItem>REGISTER</MenuItem>
                     </Link>
                     <Link to="/login">
                         <MenuItem>SING IN</MenuItem>
-                    </Link>
+                    </Link> */}
+                    {/* <MenuItem onClick={()=>dispatch(logout())} >Logout</MenuItem>---------------------- */}
                     <Link to="/cart">
                         <MenuItem>
                             <BsCart />
@@ -63,7 +84,8 @@ const Wrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    ${mobile({ padding: "10px 0" })}
+
+    ${mobile({ padding: "10px 0", marginLeft: "18px", position: 'sticky', top:'0' })}
 `;
 
 const Left = styled.div`
@@ -71,6 +93,9 @@ const Left = styled.div`
     align-items: center;
     gap: 5px;
     flex: 1;
+
+    ${mobile({ display: "none" })}
+
 `;
 
 const ImgContainer = styled.div`
@@ -87,7 +112,6 @@ const ImgContainer = styled.div`
 const Language = styled.span`
     font-size: 14px;
     cursor: pointer;
-    ${mobile({ display: "none" })}
 `;
 
 const SearchContainer = styled.div`
@@ -105,7 +129,6 @@ const SearchContainer = styled.div`
 
 const Input = styled.input`
     border: none;
-    ${mobile({ width: "50px" })}
 
     :focus {
         outline: none;
@@ -139,7 +162,7 @@ const Right = styled.div`
         color: black;
     }
 
-    ${mobile({ justifyConent: "center", gap: "10px", flex: "2" })}
+    ${mobile({ justifyContent: "flex-end", gap: "10px", flex: "2", marginRight: '17px' })}
 
     .cart__container {
         display: flex;

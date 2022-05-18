@@ -6,6 +6,7 @@ import Navbar from "../components/Navbar";
 import { IoAddSharp, IoRemoveSharp } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { decreaseCart, increaseCart, removeProduct } from "../redux/cartSlice";
+import { mobile } from "../responsive";
 
 const Cart = () => {
     const cart = useSelector((state) => state.persistedReducer.cart);
@@ -50,18 +51,20 @@ const Cart = () => {
                                     <ProductDetail>
                                         <img src={product.img} />
                                         <Details>
-                                            <ProductName>
-                                                <b>Product: </b>
-                                                {product.title}
-                                            </ProductName>
-                                            <ProductID>
-                                                <b>ID: </b>
-                                                {product._id}
-                                            </ProductID>
-                                            <ProcutSize>
-                                                <b>Size:</b> {product.size}
-                                            </ProcutSize>
-                                            <button onClick={()=> handleRemoveFromCart(product)} >remove</button>
+                                            <ProductDetails>
+                                                <ProductName>
+                                                    <b>Product: </b>
+                                                    {product.title}
+                                                </ProductName>
+                                                <ProductID>
+                                                    <b>ID: </b>
+                                                    {product._id}
+                                                </ProductID>
+                                                <ProcutSize>
+                                                    <b>Size:</b> {product.size}
+                                                </ProcutSize>
+                                            </ProductDetails>
+                                            <button onClick={()=> handleRemoveFromCart(product)} >Remove</button>
                                         </Details>
                                     </ProductDetail>
                                     <PriceDetail>
@@ -117,10 +120,17 @@ const Cart = () => {
     );
 };
 
+const ProductDetails = styled.div`
+    display: flex;
+    flex-direction: column;
+`
+
 const Container = styled.div``;
 
 const Wrapper = styled.div`
     padding: 20px;
+
+    ${mobile({ padding: "20px" })}
 `;
 
 const Title = styled.h1`
@@ -145,7 +155,10 @@ const TopButton = styled.button`
     color: ${({ type }) => type === "filled" && "white"};
 `;
 
-const TopTexts = styled.div``;
+const TopTexts = styled.div`
+    ${mobile({ display: "none" })}
+`;
+
 const TopText = styled.span`
     text-decoration: underline;
     cursor: pointer;
@@ -154,6 +167,8 @@ const TopText = styled.span`
 const Bottom = styled.div`
     display: flex;
     justify-content: space-between;
+
+    ${mobile({ flexDirection: 'column', gap: '30px' })}
 `;
 
 const Info = styled.div`
@@ -170,16 +185,22 @@ const Product = styled.div`
     display: flex;
     justify-content: space-between;
     border-bottom: 1px solid lightgray;
+
+    ${mobile({ flexDirection: 'column' })}
 `;
 
 const ProductDetail = styled.div`
     flex: 2;
     display: flex;
 
+    ${mobile({ flexDirection: 'column' })}
+
     img {
-        width: 200px;
-        height: 150px;
-        object-fit: contain;
+        min-width: 200px;
+        height: 168px;
+        object-fit: cover;
+
+        ${mobile({ objectFit: 'contain' })}
     }
 `;
 
@@ -203,22 +224,28 @@ const Details = styled.div`
     padding: 20px;
     display: flex;
     flex-direction: column;
-    justify-content: start;
+    justify-content: space-between;
+
+    button {
+        height: 20px;
+        color: grey;
+        border: none;
+        width: 80px;
+        cursor: pointer;
+        border-radius: 7px;
+        justify-content: flex-end;
+        background-color: lightgrey;
+
+        ${mobile({ marginTop: '10px' })}
+    }
 `;
 
 const ProductName = styled.span``;
 
 const ProductID = styled.span``;
 
-const ProductColor = styled.div`
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background-color: ${({ color }) => color};
-`;
-
 const ProcutSize = styled.span`
-    margin-top: 3rem;
+    /* margin-top: 3rem; */
 `;
 
 const PriceDetail = styled.div`
@@ -242,6 +269,8 @@ const SummaryInfo = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+
+    ${mobile({ gap: '7px' })}
 `;
 
 const SummaryTitle = styled.h1`

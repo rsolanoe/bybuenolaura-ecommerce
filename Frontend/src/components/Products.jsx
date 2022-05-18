@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import Product from "./Product";
-import getProduct from "../helpers/getProduct";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../redux/apiCalls";
 import LoadingSpinner from "./LoadingError/LoadingSpinner";
+import { mobile } from "../responsive";
 
 const Products = ({ cat, filters, sort }) => {
 
@@ -57,6 +57,8 @@ const Container = styled.div`
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+
+    ${mobile({ flexWrap: "nowrap", flexDirection: 'column' })}
 `;
 
 export default Products;

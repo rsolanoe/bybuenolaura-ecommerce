@@ -4,6 +4,7 @@ import { mobile } from "../responsive";
 import {useState} from 'react'
 import { useDispatch } from 'react-redux'
 import { login } from '../redux/apiCalls';
+import { useNavigate } from 'react-router-dom';
 
 
 const Container = styled.div`
@@ -25,7 +26,7 @@ const Wrapper = styled.div`
     width: 25%;
     padding: 20px;
     background-color: white;
-    ${mobile({ width: "75%" })}
+    ${mobile({ width: "90%" })}
 `;
 
 const Title = styled.h1`
@@ -64,6 +65,8 @@ const Link = styled.a`
 
 const Login = () => {
 
+    const navigate = useNavigate()
+
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
@@ -72,6 +75,7 @@ const Login = () => {
     const handleLogin = (e) => {
         e.preventDefault();
         login(dispatch, { email, password })
+        navigate(-1)
     }
 
     return (
