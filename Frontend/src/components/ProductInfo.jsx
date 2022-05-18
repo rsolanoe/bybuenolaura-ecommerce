@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { productDetails } from "../redux/apiCalls";
+import LoadingSpinner from "./LoadingError/LoadingSpinner";
 
 
 const ProductInfo = () => {
@@ -15,7 +16,7 @@ const ProductInfo = () => {
     const [amount, setAmount] = useState(1);
 
     const dispatch = useDispatch();
-    const {product} = useSelector(state => state.productDetail);
+    const {product, isFetching, error} = useSelector(state => state.productDetail);
 
     console.log(product);
 
@@ -37,6 +38,14 @@ const ProductInfo = () => {
             addProduct({ ...product, quantity: amount })
         );
     };
+
+    if(isFetching){
+        return <LoadingSpinner />
+    }
+
+    if(error){
+        return <h1>Error...</h1>
+    }
 
     return (
         <Container>

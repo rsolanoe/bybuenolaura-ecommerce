@@ -10,7 +10,7 @@ import PrivateRoute from "./PrivateRoute";
 
 const AppRouter = () => {
 
-    const {currentUser} = useSelector(state => state.user);
+    const {currentUser} = useSelector(state => state.persistedReducer.user);
 
     return (
         <BrowserRouter>

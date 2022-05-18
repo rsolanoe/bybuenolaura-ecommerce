@@ -7,8 +7,7 @@ import { mobile } from "../responsive";
 import { useSelector } from "react-redux";
 
 const Navbar = () => {
-
-    const {quantity} = useSelector(state => state.cart)
+    const { quantity } = useSelector((state) => state.persistedReducer.cart);
 
     return (
         <Container>
@@ -40,11 +39,11 @@ const Navbar = () => {
                     <Link to="/cart">
                         <MenuItem>
                             <BsCart />
-                                   {quantity > 0 ? (
-                        <div className="cart__container">
-                           <span>{quantity}</span>
-                        </div>
-                     ) : null}
+                            {quantity > 0 ? (
+                                <div className="cart__container">
+                                    <span>{quantity}</span>
+                                </div>
+                            ) : null}
                         </MenuItem>
                     </Link>
                 </Right>
@@ -83,7 +82,7 @@ const ImgContainer = styled.div`
     img {
         width: 100%;
     }
-`
+`;
 
 const Language = styled.span`
     font-size: 14px;

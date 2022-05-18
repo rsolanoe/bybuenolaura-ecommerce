@@ -4,11 +4,26 @@ import Announcement from "../components/Announcement";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { IoAddSharp, IoRemoveSharp } from "react-icons/io5";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { decreaseCart, increaseCart, removeProduct } from "../redux/cartSlice";
 
 const Cart = () => {
-    const cart = useSelector((state) => state.cart);
-    console.log(cart);
+    const cart = useSelector((state) => state.persistedReducer.cart);
+    console.log(cart.products);
+
+    const dispatch = useDispatch();
+
+    const handleRemoveFromCart = (product) => {
+        dispatch(removeProduct(product))
+    }
+
+    const handleDecreaseQuantity = (product) => {
+        dispatch(decreaseCart(product))
+    }
+
+    const handleIncreaseQuantity = (product) => {
+        dispatch(increaseCart(product))
+    }
 
     return (
         <Container>
@@ -19,70 +34,83 @@ const Cart = () => {
                 <Top>
                     <TopButton>CONTINUE SHOPPING</TopButton>
                     <TopTexts>
-                        <TopText>Shopping Bag(2)</TopText>
+                        <TopText>Shopping Bag({cart.quantity})</TopText>
                         <TopText>Your Whislist (0)</TopText>
                     </TopTexts>
                     <TopButton type="filled">CHECKOUT NOW</TopButton>
                 </Top>
 
-                <Bottom>
-                    <Info>
-                        {cart.products.map((product) => (
-                            <Product key={product._id}>
-                                <ProductDetail>
-                                    <img src={product.img} />
-                                    <Details>
-                                        <ProductName>
-                                            <b>Product: </b>{product.title}
-                                        </ProductName>
-                                        <ProductID>
-                                            <b>ID: </b>{product._id}
-                                        </ProductID>
-                                        <ProcutSize>
-                                            <b>Size:</b> {product.size}
-                                        </ProcutSize>
-                                    </Details>
-                                </ProductDetail>
-                                <PriceDetail>
-                                    <ProductAmountContainer>
-                                        <IoRemoveSharp />
-                                        <ProductAmount>{product.quantity}</ProductAmount>
-                                        <IoAddSharp />
-                                    </ProductAmountContainer>
-                                    <ProductPrice>$ {product.price*product.quantity}</ProductPrice>
-                                </PriceDetail>
-                            </Product>
-                              
-                        ))}
-                        
-                    </Info>
-                    <Summary>
-                        <SummaryInfo>
-                            <SummaryTitle>ORDER SUMMARY</SummaryTitle>
-                            <SummaryItem>
-                                <SummaryItemText>Subtotal</SummaryItemText>
-                                <SummaryItemPrice>$ {cart.total}</SummaryItemPrice>
-                            </SummaryItem>
-                            <SummaryItem>
-                                <SummaryItemText>
-                                    Estimated Shipping
-                                </SummaryItemText>
-                                <SummaryItemPrice>$ 5.90</SummaryItemPrice>
-                            </SummaryItem>
-                            <SummaryItem>
-                                <SummaryItemText>
-                                    Shipping Discount
-                                </SummaryItemText>
-                                <SummaryItemPrice>$ -5.90</SummaryItemPrice>
-                            </SummaryItem>
-                            <SummaryItem type="total">
-                                <SummaryItemText>Total</SummaryItemText>
-                                <SummaryItemText>$ {cart.total}</SummaryItemText>
-                            </SummaryItem>
-                            <SummaryButton>CHECKOUT NOW</SummaryButton>
-                        </SummaryInfo>
-                    </Summary>
-                </Bottom>
+                {cart.products.length === 0 
+                    ? (<h1>Cart empty...</h1>) 
+                    : (
+                    <Bottom>
+                        <Info>
+                            {cart.products.map((product) => (
+                                <Product key={product._id}>
+                                    <ProductDetail>
+                                        <img src={product.img} />
+                                        <Details>
+                                            <ProductName>
+                                                <b>Product: </b>
+                                                {product.title}
+                                            </ProductName>
+                                            <ProductID>
+                                                <b>ID: </b>
+                                                {product._id}
+                                            </ProductID>
+                                            <ProcutSize>
+                                                <b>Size:</b> {product.size}
+                                            </ProcutSize>
+                                            <button onClick={()=> handleRemoveFromCart(product)} >remove</button>
+                                        </Details>
+                                    </ProductDetail>
+                                    <PriceDetail>
+                                        <ProductAmountContainer>
+                                            <IoRemoveSharp onClick={()=> handleDecreaseQuantity(product)} />
+                                            <ProductAmount>
+                                                {product.quantity}
+                                            </ProductAmount>
+                                            <IoAddSharp onClick={()=> handleIncreaseQuantity(product)} />
+                                        </ProductAmountContainer>
+                                        <ProductPrice>
+                                            $ {product.price * product.quantity}
+                                        </ProductPrice>
+                                    </PriceDetail>
+                                </Product>
+                            ))}
+                        </Info>
+                        <Summary>
+                            <SummaryInfo>
+                                <SummaryTitle>ORDER SUMMARY</SummaryTitle>
+                                <SummaryItem>
+                                    <SummaryItemText>Subtotal</SummaryItemText>
+                                    <SummaryItemPrice>
+                                        $ {cart.total}
+                                    </SummaryItemPrice>
+                                </SummaryItem>
+                                <SummaryItem>
+                                    <SummaryItemText>
+                                        Estimated Shipping
+                                    </SummaryItemText>
+                                    <SummaryItemPrice>$ 5.90</SummaryItemPrice>
+                                </SummaryItem>
+                                <SummaryItem>
+                                    <SummaryItemText>
+                                        Shipping Discount
+                                    </SummaryItemText>
+                                    <SummaryItemPrice>$ -5.90</SummaryItemPrice>
+                                </SummaryItem>
+                                <SummaryItem type="total">
+                                    <SummaryItemText>Total</SummaryItemText>
+                                    <SummaryItemText>
+                                        $ {cart.total}
+                                    </SummaryItemText>
+                                </SummaryItem>
+                                <SummaryButton>CHECKOUT NOW</SummaryButton>
+                            </SummaryInfo>
+                        </Summary>
+                    </Bottom>
+                )}
             </Wrapper>
             <Footer />
         </Container>
