@@ -1,5 +1,8 @@
 import styled from "styled-components";
 import { mobile } from "../responsive";
+import {useState} from 'react'
+import { useDispatch } from 'react-redux'
+import { register } from "../redux/apiCalls";
 
 const Container = styled.div`
   width: 100vw;
@@ -55,22 +58,44 @@ const Button = styled.button`
 `;
 
 const Register = () => {
+
+    const dispatch = useDispatch();
+
+    const [form, setForm] = useState({username: '', email: '', password1: '', password2: ''})
+
+    const {username, email, password, password2 } = form
+
+    const handleInputChange = ({target}) => {
+        setForm({
+            ...form,
+            [target.name]: target.value
+        })
+    }
+
+    const handleRegister = (e) => {
+        e.preventDefault()
+        if(password !== password2) {
+            alert('Las contraseñas deben de ser iguales')
+        }
+        register(dispatch, { username, email, password })
+    }
+
     return (
         <Container>
             <Wrapper>
                 <Title>CREATE AN ACCOUNT</Title>
-                <Form>
+                <Form onSubmit={handleRegister}>
                     <Input placeholder="name" />
                     <Input placeholder="last name" />
-                    <Input placeholder="username" />
-                    <Input type='email' placeholder="email" />
-                    <Input type='password' placeholder="password" />
-                    <Input type='password' placeholder="confirm password" />
+                    <Input name="username" value={username} onChange={handleInputChange} placeholder="username" />
+                    <Input name="email" value={email} onChange={handleInputChange} type='email' placeholder="email" />
+                    <Input name="password" value={password} onChange={handleInputChange} type='password' placeholder="password" />
+                    <Input name="password2" value={password2} onChange={handleInputChange} type='password' placeholder="confirm password" />
                     <Agreement>
                         By creating an account, I consent to the processing of my personal
                         data in accordance with the <b>PRIVACY POLICY</b>
                     </Agreement>
-                    <Button>CREATE</Button>
+                    <Button type="submit">CREATE</Button>
                 </Form>
             </Wrapper>
         </Container>

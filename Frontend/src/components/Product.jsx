@@ -25,7 +25,12 @@ const Product = ({ item }) => {
 };
 
 const Container = styled.div`
-    
+    /* min-width: 130px;
+    flex: 1 1 150px;
+    ${mobile({ minWidth: "100px" })} */
+
+
+
     & > a {
         text-decoration: none;
         color: inherit;
@@ -37,6 +42,8 @@ const ProductInfo = styled.div`
     display: flex;
     flex-direction: column;
     gap: 10px;
+
+    ${mobile({ fontSize: "11px", gap: '5px' })}
     
     p{
         font-weight: 550;
@@ -45,6 +52,7 @@ const ProductInfo = styled.div`
 
     span {
         padding-left: 7px;
+        ${mobile({ fontSize: "11px" })}
     }
 `
 
@@ -55,6 +63,8 @@ const LinkContainer = styled.div`
     border-top: 1px solid lightgray;
     cursor: pointer;
     transition: all 0.2s ease;
+
+    ${mobile({ fontSize: "11px", padding: '7px' })}
     
     
     &:hover{
@@ -76,8 +86,10 @@ const ProductContainer = styled.div`
     align-items: center;
     gap: 10px;
     margin: 7px;
-    min-width: 310px;
+    /* width: 310px; */
     box-shadow: 0 0 2px grey;
+
+    /* ${mobile({ width: "140px" })} */
     
     
     figure {
@@ -89,7 +101,7 @@ const ProductContainer = styled.div`
         height: 350px;
         z-index: 2;
         object-fit: cover;
-        ${mobile({ height: "270px" })}
+        ${mobile({ height: "150px" })}
     }
 
     

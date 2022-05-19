@@ -54,11 +54,14 @@ const Products = ({ cat, filters, sort }) => {
 
 const Container = styled.div`
     padding: 20px;
-    display: flex;
+    /* display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-between; */
 
-    ${mobile({ flexWrap: "nowrap", flexDirection: 'column' })}
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+
+    ${mobile({ gridTemplateColumns: 'repeat(2, 1fr)' })}
 `;
 
 export default Products;
