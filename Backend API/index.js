@@ -8,6 +8,7 @@ const authRoute = require("./routes/auth");
 const productRoute = require("./routes/product");
 const cartRoute = require("./routes/cart");
 const orderRoute = require("./routes/order");
+const payuRoute = require("./routes/payu");
 const cors = require("cors");
 
 mongoose
@@ -26,6 +27,7 @@ app.use("/api/users", userRoute);
 app.use("/api/products", productRoute);
 app.use("/api/cart", cartRoute);
 app.use("/api/orders", orderRoute);
+app.use("/api/payu", payuRoute);
 
 app.listen(process.env.PORT, () => {
     console.log("Backend Server is running in port 5000");

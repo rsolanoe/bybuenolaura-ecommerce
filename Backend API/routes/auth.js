@@ -24,8 +24,17 @@ router.post("/register", async (req, res) => {
         });
 
         newUser = await user.save();
-        // guarda en la DB
-        res.status(200).json(newUser); // estudiar
+
+        const accessToken = jwt.sign(
+            {
+                id: newUser._id,
+                isAdmin: newUser.isAdmin,
+            },
+            process.env.JWT_SEC,
+            { expiresIn: "3d" }
+        );
+
+        res.status(200).json({...newUser._doc, accessToken}); // estudiar
     } catch (error) {
         res.status(500).json({ ok: false, msg: error }); // estudiar
     }

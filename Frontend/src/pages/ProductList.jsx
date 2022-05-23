@@ -31,8 +31,6 @@ const ProductList = () => {
 
     return (
         <Container>
-            <Announcement />
-            <Navbar />
             <Title>{category}</Title>
             <FilterContainer>
                 <Filter>
@@ -64,9 +62,7 @@ const ProductList = () => {
                     </Select>
                 </Filter>
             </FilterContainer>
-            <Products cat={category} filters={filters} sort={sort} />
-            <Newsletter />
-            <Footer />
+            <Products cat={category} filters={filters} merchantid={508029} />
         </Container>
     );
 };

@@ -1,35 +1,42 @@
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
-import Announcement from "../components/Announcement";
-import Navbar from "../components/Navbar";
-//import ProductInfo from "../components/ProductInfo";
-import getProductById from "../selectors/getProductById";
+import styled from "styled-components";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { clearCart } from "../redux/cartSlice";
+import { userInfo } from "../redux/userSlice";
 
 const Carrousel = () => {
+    window.scrollTo(0, 0);
 
-   window.scrollTo(0,0)
-  
-   const {itemId} = useParams();
-   console.log(itemId === '6');
+    const baseurl = window.location.search
+    const dispatch = useDispatch();
 
-   const product = getProductById(itemId);
-   console.log(product);
+    useEffect(() => {
+        const getPayuData = async () => {
+            const { data } = await axios.get(
+                `http://localhost:5000/api/payu${baseurl}`
+            );
+            // const { data } = await axios.get(
+            //     `http://localhost:5000/api/payu?merchanId=508029&transactionState=4&referenceCode=PAGOTESTBYBUENOLAURAtest2&TX_VALUE=75000.00&currency=COP`
+            // );
+            console.log(data);
+            dispatch(clearCart());
+            dispatch(userInfo({}))
+        };
+        getPayuData();
+    }, []);
 
-   
-   
-
-   return (
-      <> 
-         <Announcement />
-         <Navbar />
-        {/*  {
-            product.map(item => (
-               <ProductInfo key={item.id} {...item}/>
-            ))
-         } */}
-         {/* <ProductInfo name={product[0].name}/> */}
-      </>
-   );
+    return (
+        <>
+            <Container>
+                <h1>PayU TEST</h1>
+            </Container>
+        </>
+    );
 };
+
+const Container = styled.div`
+    height: 80vh;
+`;
 
 export default Carrousel;

@@ -76,7 +76,10 @@ const Navbar = () => {
 const Container = styled.header`
     height: 60px;
     box-shadow: 0px 0px 7px lightgray;
-    ${mobile({ height: "50px" })}
+    background-color: white;
+    padding: 0 80px;
+    
+    ${mobile({ height: "50px", padding:'0' })}
 `;
 
 const Wrapper = styled.div`

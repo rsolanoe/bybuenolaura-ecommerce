@@ -7,12 +7,19 @@ import { IoAddSharp, IoRemoveSharp } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { decreaseCart, increaseCart, removeProduct } from "../redux/cartSlice";
 import { mobile } from "../responsive";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
     const cart = useSelector((state) => state.persistedReducer.cart);
     console.log(cart.products);
 
+    const navigate = useNavigate()
+
     const dispatch = useDispatch();
+
+    const handleClick = () => {
+        navigate('/shipping')
+    }
 
     const handleRemoveFromCart = (product) => {
         dispatch(removeProduct(product))
@@ -28,8 +35,6 @@ const Cart = () => {
 
     return (
         <Container>
-            <Announcement />
-            <Navbar />
             <Wrapper>
                 <Title>YUR BAG</Title>
                 <Top>
@@ -109,13 +114,12 @@ const Cart = () => {
                                         $ {cart.total}
                                     </SummaryItemText>
                                 </SummaryItem>
-                                <SummaryButton>CHECKOUT NOW</SummaryButton>
+                                <SummaryButton onClick={handleClick} >CHECKOUT NOW</SummaryButton>
                             </SummaryInfo>
                         </Summary>
                     </Bottom>
                 )}
             </Wrapper>
-            <Footer />
         </Container>
     );
 };
@@ -294,6 +298,7 @@ const SummaryButton = styled.button`
     background-color: black;
     color: white;
     font-weight: 600;
+    cursor: pointer;
 `;
 
 export default Cart;

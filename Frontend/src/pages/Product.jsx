@@ -9,11 +9,7 @@ const Product = () => {
    window.scrollTo(0, 0)
    return (
          <>
-            <Announcement />
-            <Navbar />
             <ProductInfo />
-            <Newsletter />
-            <Footer />
          </>
    );
 };

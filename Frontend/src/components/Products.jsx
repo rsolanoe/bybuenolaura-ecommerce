@@ -4,9 +4,9 @@ import Product from "./Product";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../redux/apiCalls";
 import LoadingSpinner from "./LoadingError/LoadingSpinner";
-import { mobile } from "../responsive";
+import { mobile, tablet } from "../responsive";
 
-const Products = ({ cat, filters, sort }) => {
+const Products = ({ cat, filters, merchantid }) => {
 
     const dispatch = useDispatch();
     const {products, isFetching, error} = useSelector(state => state.product);
@@ -53,7 +53,7 @@ const Products = ({ cat, filters, sort }) => {
 };
 
 const Container = styled.div`
-    padding: 20px;
+    padding: 20px 80px;
     /* display: flex;
     flex-wrap: wrap;
     justify-content: space-between; */
@@ -61,7 +61,7 @@ const Container = styled.div`
     display: grid;
     grid-template-columns: repeat(4, 1fr);
 
-    ${mobile({ gridTemplateColumns: 'repeat(2, 1fr)' })}
+    ${mobile({ gridTemplateColumns: 'repeat(2, 1fr)', padding: '20px' })}
 `;
 
 export default Products;

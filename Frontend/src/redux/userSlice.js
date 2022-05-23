@@ -6,6 +6,7 @@ const userSlice = createSlice({
         currentUser: null,
         isFetching: false,
         error: false,
+        customerInfo: {}
     },
     reducers: {
         loginStart: (state) => {
@@ -22,9 +23,12 @@ const userSlice = createSlice({
         logout: (state) => {
             state.currentUser = null;
             state.error = false
+        },
+        userInfo: (state, action) => {
+            state.customerInfo = action.payload
         }
     },
 });
 
-export const { loginStart, loginSuccess, loginfailure, logout } = userSlice.actions;
+export const { loginStart, loginSuccess, loginfailure, logout, userInfo } = userSlice.actions;
 export default userSlice.reducer;

@@ -19,7 +19,7 @@ const Categories = () => {
 
 const Container = styled.section`
     display: flex;
-    padding: 20px;
+    padding: 20px 80px;
     justify-content: space-between;
 
     ${mobile({padding: '0', flexDirection: 'column'})}
