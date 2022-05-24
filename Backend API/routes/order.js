@@ -9,6 +9,7 @@ const Order = require("../models/Order");
 //CREATE
 router.post("/", verifyToken, async (req, res) => {
     const newOrder = new Order(req.body);
+    console.log('LOG 2', newOrder)
     try {
         const savedOrder = await newOrder.save();
         res.status(200).json(savedOrder);
@@ -36,7 +37,7 @@ router.put("/:id", verifyTokenAndAdmin, async (req, res) => {
 //DELETE
 router.delete("/:id", verifyTokenAndAdmin, async (req, res) => {
     try {
-        await Order.findByIdAndDelete(req.params.id);
+        await Order.findByIdAndDelete(req.params);
         res.status(200).json("Order has been deleted...");
     } catch (error) {
         res.status(500).json(error);
@@ -46,7 +47,9 @@ router.delete("/:id", verifyTokenAndAdmin, async (req, res) => {
 //GET USER ORDERS
 router.get("/find/:userid", verifyTokenAndAuthorization, async (req, res) => {
     try {
-        const orders = await Order.find({ userID: req.params.id });
+        console.log('LOG 1', req.params.userid)
+        const orders = await Order.find({ userId: req.params.userid });
+        console.log('LOG 2',orders)
         res.status(200).json(orders);
     } catch (error) {
         res.status(500).json(error);

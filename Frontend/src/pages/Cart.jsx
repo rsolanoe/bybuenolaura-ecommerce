@@ -1,8 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import Announcement from "../components/Announcement";
-import Footer from "../components/Footer";
-import Navbar from "../components/Navbar";
 import { IoAddSharp, IoRemoveSharp } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { decreaseCart, increaseCart, removeProduct } from "../redux/cartSlice";
@@ -11,9 +8,9 @@ import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
     const cart = useSelector((state) => state.persistedReducer.cart);
-    console.log(cart.products);
 
-    const navigate = useNavigate()
+
+    const navigate = useNavigate();
 
     const dispatch = useDispatch();
 

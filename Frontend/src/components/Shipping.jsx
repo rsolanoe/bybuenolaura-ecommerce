@@ -1,18 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { mobile } from "../responsive";
 import { useDispatch, useSelector } from 'react-redux'
 import { userInfo } from "../redux/userSlice";
 import { useNavigate } from 'react-router-dom'
+import axios from "axios";
 
 
 const Shipping = () => {
 
-    const user = useSelector(state => state.persistedReducer.user.customerInfo);
-    console.log(user);
     const dispatch = useDispatch();
-    
     const navigate = useNavigate()
+
+    const user = useSelector(state => state.persistedReducer.user.customerInfo);
 
     const initialState = {
         name: '',
@@ -20,14 +20,46 @@ const Shipping = () => {
         phoneNumber: '',
         address: '',
         neighborhood: '',
-        city: '',
+        departamento: '',
+        municipio: '',
     }
 
+    const [departamentos, setDepartamentos] = useState([])
+    const [municipios, setMunicipios] = useState([])
+
     const [formValues, setFormValues] = useState(user || initialState)
-    console.log(formValues);
+    const { name, lastName, phoneNumber, address, neighborhood, departamento, municipio } = formValues
 
-    const {name, lastName, phoneNumber, address, neighborhood, city} = formValues
+    useEffect(() => {
+        const getDepartamentosData = async () => {
+            const { data } = await axios.get(
+                `https://www.datos.gov.co/resource/xdk5-pm3f.json?$select=departamento&$group=departamento`,{
+                    headers: {
+                        'X-App-Token': 'MgYCRMOayxwF6m662Qq2qA908'
+                    }
+                }
+            );
+            const sortedDepartamentos = data.map(depart => depart.departamento)
+            setDepartamentos(sortedDepartamentos.sort())
+        };
+        getDepartamentosData();
+    }, []);
 
+    useEffect(() => {
+        const getMunicipiosData = async () => {
+            const { data } = await axios.get(
+                `https://www.datos.gov.co/resource/xdk5-pm3f.json?$select=municipio&$where=departamento=='${departamento}'`,{
+                    headers: {
+                        'X-App-Token': 'MgYCRMOayxwF6m662Qq2qA908'
+                    }
+                }
+            );
+            const sortedMunicipios = data.map(municipio => municipio.municipio)
+            setMunicipios(sortedMunicipios.sort())
+        };
+        getMunicipiosData();
+    }, [departamento]);
+   
     const handleChange = ({target}) => {
         setFormValues({
             ...formValues,
@@ -48,9 +80,24 @@ const Shipping = () => {
                 <input onChange={handleChange} value={name} name="name" type="text" placeholder="Nombre" />
                 <input onChange={handleChange} value={lastName} name="lastName" type="text" placeholder="Apellido" />
                 <input onChange={handleChange} value={phoneNumber} name="phoneNumber" type="text" placeholder="Teléfono móvil"/>
+                <select onChange={handleChange} name='departamento' value={departamento}>
+                    <option>Departamento</option>
+                    {
+                        departamentos?.sort().map(item => (
+                            <option key={item} >{item}</option>
+                        ))
+                    }
+                </select>
+                <select onChange={handleChange} name='municipio' value={municipio}>
+                    <option>Municipio</option>
+                    {
+                        municipios.map(item => (
+                            <option key={item} >{item}</option>
+                        ))
+                    }
+                </select>
                 <input onChange={handleChange} value={address} name="address" type="text" placeholder="Dirección" />
                 <input onChange={handleChange} value={neighborhood} name="neighborhood" type="text" placeholder="Barrio" />
-                <input onChange={handleChange} value={city} name="city" type="text" placeholder="Ciudad" />
                 <button name="" type="submit">Cotinue</button>
             </Form>
         </Container>
@@ -80,7 +127,7 @@ const Form = styled.form`
         font-weight: 600;
     }
 
-    input {
+    input, select {
         padding: 10px 5px;
         font-size: 0.8rem;
         outline: 1px lightgray solid;
@@ -91,6 +138,10 @@ const Form = styled.form`
             outline: 1px teal solid;
             box-shadow: 0 0 15px -10px rgba(0, 0, 0, 0.75);
         }
+    }
+
+    select{
+        color: gray;
     }
 
     button {

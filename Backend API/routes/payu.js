@@ -17,13 +17,10 @@ router.get("/", async (req, res) => {
 //GET ALL PAYU INFO ADMIN
 router.post("/finish", async (req, res) => {
 
-    console.log('*CONFIRMATION TEST RES:**************',res)
-    console.log(req)
-    const queries = req.query
+    console.log('*****REQ*****',req)
+    console.log('*****RES*****',res)
     try {
-        if (queries) {
-            return res.status(200).json(queries);
-        }
+        return res.status(200).json(req);
     } catch (error) {
         res.status(500).json(error);
     }

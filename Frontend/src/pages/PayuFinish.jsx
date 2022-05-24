@@ -1,21 +1,23 @@
-import React, { useEffect } from "react";
+import React, {useEffect} from "react";
 import styled from "styled-components";
 import axios from "axios";
 
 const PayuFinish = () => {
     window.scrollTo(0, 0);
 
-    // const baseurl = window.location.search
-
-    // useEffect(() => {
-    //     const getPayuData = async () => {
-    //         const { data } = await axios.post(
-    //             `https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu/`
-    //         );
-    //         console.log(data);
-    //     };
-    //     getPayuData();
-    // }, []);
+    useEffect(() => {
+        const getPayuData = async () => {
+            const { data } = await axios.post(
+                `https://bybuenolaurae.herokuapp.com/api/payu/finish`,{
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    }
+                }
+            );
+            console.log(data);
+        };
+        getPayuData();
+    }, []);
 
     return (
         <>

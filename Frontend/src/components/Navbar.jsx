@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { FaSearch } from "react-icons/fa";
 import { BsCart } from "react-icons/bs";
+import { RiArrowDownSLine, RiShoppingCartLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import { mobile } from "../responsive";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,6 +13,8 @@ const Navbar = () => {
 
     const dispatch = useDispatch();
     const {currentUser} = useSelector(state => state.persistedReducer.user);
+
+    const [hide, setHide] = useState(true)
 
     return (
         <Container>
@@ -37,7 +40,19 @@ const Navbar = () => {
                     {
                         currentUser
                         ? (
-                            <MenuItem onClick={()=>dispatch(logout())} >LOGOUT</MenuItem>
+                            <>
+                                <OptionsContainer onMouseLeave={()=>setHide(true)}>
+                                    <UsernameContainer onMouseEnter={()=>setHide(false)} >
+                                        <p>Hola, pello</p>
+                                        <ArrowContainer><RiArrowDownSLine/></ArrowContainer>
+                                    </UsernameContainer>
+                                    <UserDropDownMenu show={hide} >
+                                        <Link to='profile'><ProfileOption onClick={()=>setHide(true)} >Perfil</ProfileOption></Link>
+                                        <ProfileOption onClick={()=>{dispatch(logout()); setHide(true)}} >Cerrar sesión</ProfileOption>
+                                    </UserDropDownMenu>
+                                </OptionsContainer>
+                                {/* <MenuItem onClick={()=>dispatch(logout())} >LOGOUT</MenuItem> */}
+                            </>
                         )
                         : (<>
                             <Link to="/register">
@@ -59,7 +74,7 @@ const Navbar = () => {
                     {/* <MenuItem onClick={()=>dispatch(logout())} >Logout</MenuItem>---------------------- */}
                     <Link to="/cart">
                         <MenuItem>
-                            <BsCart />
+                            <RiShoppingCartLine />
                             {quantity > 0 ? (
                                 <div className="cart__container">
                                     <span>{quantity}</span>
@@ -72,6 +87,51 @@ const Navbar = () => {
         </Container>
     );
 };
+
+const OptionsContainer = styled.div`
+    position: relative;
+
+`
+
+const ArrowContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`
+
+const UsernameContainer = styled.div`
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+`
+
+const ProfileOption = styled.div`
+    background-color: #ffffff;
+    padding: 5px ;
+    color: black;
+    cursor: pointer;
+    transition: all 0.1s ease;
+    border: 1px solid lightgray;
+
+    &:hover {
+        background-color: teal;
+        color: white;
+    }
+
+`
+
+const UserDropDownMenu = styled.div`
+    display: ${({show}) => show == true ? 'none' : 'block'};
+    border-radius: 3px;
+    overflow: hidden;
+    position: absolute;
+    width: 105px;
+
+    /* a {
+        color: black !important;
+    } */
+`
 
 const Container = styled.header`
     height: 60px;
@@ -158,11 +218,11 @@ const Right = styled.div`
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    gap: 25px;
+    gap: 2rem;
 
     a {
         text-decoration: none;
-        color: black;
+        color: inherit;
     }
 
     ${mobile({ justifyContent: "flex-end", gap: "10px", flex: "2", marginRight: '17px' })}
@@ -175,8 +235,8 @@ const Right = styled.div`
         right: 0;
         top: 0;
         transform: translate(30%, -20%);
-        height: 22px;
-        width: 22px;
+        height: 17px;
+        width: 17px;
         background-color: blue;
         color: white;
         border-radius: 50%;
@@ -190,11 +250,11 @@ const MenuItem = styled.div`
     ${mobile({ fontSize: "12px" })}
 
     svg {
-        font-size: 35px;
+        font-size: 25px;
     }
 
     span {
-        font-size: 15px;
+        font-size: 12px;
         font-weight: bold;
         //border-radius: 50%;
         text-align: center;

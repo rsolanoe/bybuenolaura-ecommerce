@@ -35,6 +35,24 @@ export const register = async (dispatch, user) => {
 };
 
 
+// ADD ORDER
+export const addOrder = async (orderInfo, token) => {
+
+    const options = {
+        headers: {
+            token: `Bearer ${token}`
+        }
+    }
+
+    try {
+        const { data } = await axios.post('http://localhost:5000/api/orders', orderInfo, options)
+        console.log(data)
+    } catch (error) {
+        console.log(error)
+    }
+
+}
+
 // GET ALL PRODUCTS
 export const getProducts = async (dispatch, category) => {
     dispatch(getProductStart());

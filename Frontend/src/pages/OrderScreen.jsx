@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { FaUserAlt } from "react-icons/fa";
 import { MdLocalShipping } from "react-icons/md";
@@ -6,26 +6,48 @@ import { IoLocationSharp } from "react-icons/io5";
 import OrderItem from '../components/OrderItem';
 import { useSelector } from "react-redux";
 import { mobile } from '../responsive';
-import axios from 'axios';
+import md5 from 'md5'
+
+
 
 const OrderScreen = () => {
 
     const {products, total} = useSelector(state => state.persistedReducer.cart);
-    const {name, lastName, phoneNumber, address, neighborhood, city} = useSelector(state => state.persistedReducer.user.customerInfo);
+    const {name, lastName, phoneNumber, address, neighborhood, departamento, municipio} = useSelector(state => state.persistedReducer.user.customerInfo);
+    const state = useSelector(state => state.persistedReducer.user.customerInfo);
     const {email} = useSelector(state => state.persistedReducer.user.currentUser);
+
+    const [signature, setSignature] = useState('')
+    const [secretCode   , setSecretCode    ] = useState('')
+
+    useEffect(() => {
+        const generateSignature = () => {
+            const apiKey = '4Vj8eK4rloUd272L48hsrarnUA';
+            const merchantId = '508029'
+            const referenceCode = new Date().getTime()
+            setSecretCode(referenceCode)
+            const hashedSign = md5(`${apiKey}~${merchantId}~${referenceCode}~${total}~COP`)
+            setSignature(hashedSign);
+        }
+        generateSignature()
+
+    }, [])
+    
+
+    console.log(state);
     
     return (
         <Container>
             <TopContainer>
                 <OrderItem icon={<FaUserAlt/>} title='Cliente' infoTop={name + ' ' + lastName} infoBottom={email}  />
-                <OrderItem icon={<MdLocalShipping/>} title='Order info' infoTop={`Shipping: ${city}`} infoBottom={phoneNumber}  />
+                <OrderItem icon={<MdLocalShipping/>} title='Order info' infoTop={`Shipping: ${municipio} - ${departamento}`} infoBottom={phoneNumber}  />
                 <OrderItem icon={<IoLocationSharp/>} title='Deliver to' infoTop={address} infoBottom={neighborhood}  />
             </TopContainer>
             <BottomContainer>
                 <ProductsContainer>
                     {
                         products.map(product => (
-                            <>
+                            
                                 <ProductContainer key={product.title}>
                                     <ProductInfoContainer>
                                         <ProductImgContainer><img src={product.img} alt={product.title} /></ProductImgContainer>
@@ -42,7 +64,7 @@ const OrderScreen = () => {
                                         </PriceContainer>
                                     </ProductPriceContainer>
                                 </ProductContainer>
-                            </>
+                            
                         ))
                     }
                 </ProductsContainer>
@@ -68,18 +90,18 @@ const OrderScreen = () => {
                         <input name="merchantId"         type="hidden"  value="508029"   /> {/* esta info viende de la cuenta de PayU cuando te registras */}
                         <input name="accountId"          type="hidden"  value="512321" /> {/* esta info viende de la cuenta de PayU cuando te registras */}
                         <input name="description"        type="hidden"  value="baq1rosolano"  />
-                        <input name="referenceCode"      type="hidden"  value="TESTrjse31v5" />
+                        <input name="referenceCode"      type="hidden"  value={secretCode} />
                         <input name="amount"             type="hidden"  value={total}   />
                         <input name="tax"                type="hidden"  value="0"  />
                         <input name="taxReturnBase"      type="hidden"  value="0" />
                         <input name="currency"           type="hidden"  value="COP" />
-                        <input name="signature"          type="hidden"  value="76212c724f50ec53718cc719a0b112e2"  /> {/* hay que encriptar y concatenar con MD5 */}
+                        <input name="signature"          type="hidden"  value={signature} /> {/* hay que encriptar y concatenar con MD5 */}
                         <input name="test"               type="hidden"  value="0" />
                         <input name="buyerEmail"         type="hidden"  value="rjsolanoe@gmail.com" /> {/* este email viene de la pagina */}
                         <input name="responseUrl"        type="hidden"  value="http://localhost:3000/payu" />
-                        <input name="confirmationUrl"    type="hidden"  value="http://localhost:3000/payufinish" />
-                        <input name="shippingAddress"    type="hidden"  value={address}   />{/* viene de la pagina */}
-                        <input name="shippingCity"       type="hidden"  value={city} />{/* el usuario da esta info */}
+                        <input name="confirmationUrl"    type="hidden"  value="https://bybuenolaurae.herokuapp.com/payufinish" />
+                        <input name="shippingAddress"    type="hidden"  value={address}   />
+                        <input name="shippingCity"       type="hidden"  value={municipio} />
                         <input name="shippingCountry"    type="hidden"  value="CO"  />{/* user gives this info */}
                         <Input name="Submit"             type="submit"  value="Enviar" />
                     </form>
