@@ -14,11 +14,10 @@ const OrderScreen = () => {
 
     const {products, total} = useSelector(state => state.persistedReducer.cart);
     const {name, lastName, phoneNumber, address, neighborhood, departamento, municipio} = useSelector(state => state.persistedReducer.user.customerInfo);
-    const state = useSelector(state => state.persistedReducer.user.customerInfo);
     const {email} = useSelector(state => state.persistedReducer.user.currentUser);
 
-    const [signature, setSignature] = useState('')
-    const [secretCode   , setSecretCode    ] = useState('')
+    const [ signature, setSignature ] = useState('')
+    const [ secretCode, setSecretCode ] = useState('')
 
     useEffect(() => {
         const generateSignature = () => {
@@ -32,15 +31,12 @@ const OrderScreen = () => {
         generateSignature()
 
     }, [])
-    
-
-    console.log(state);
-    
+       
     return (
         <Container>
             <TopContainer>
                 <OrderItem icon={<FaUserAlt/>} title='Cliente' infoTop={name + ' ' + lastName} infoBottom={email}  />
-                <OrderItem icon={<MdLocalShipping/>} title='Order info' infoTop={`Shipping: ${municipio} - ${departamento}`} infoBottom={phoneNumber}  />
+                <OrderItem icon={<MdLocalShipping/>} title='Order info' infoTop={`${municipio} - ${departamento}`} infoBottom={phoneNumber}  />
                 <OrderItem icon={<IoLocationSharp/>} title='Deliver to' infoTop={address} infoBottom={neighborhood}  />
             </TopContainer>
             <BottomContainer>
@@ -103,7 +99,7 @@ const OrderScreen = () => {
                         <input name="shippingAddress"    type="hidden"  value={address}   />
                         <input name="shippingCity"       type="hidden"  value={municipio} />
                         <input name="shippingCountry"    type="hidden"  value="CO"  />{/* user gives this info */}
-                        <Input name="Submit"             type="submit"  value="Enviar" />
+                        <Input name="Submit"             type="submit"  value="Pagar" />
                     </form>
                 </DetailContainer>
 
@@ -181,13 +177,12 @@ const TopContainer = styled.div`
     justify-content: space-between;
     align-items: center;
     width: 80vw;
-    /* height: 150px; */
     margin: 2rem auto;
     padding: 30px 40px;
     background-color: #1d80804b;
     border-radius: 10px;
 
-    ${mobile({flexDirection: 'column', width: '95vw', padding: '10px', gap:'5px', margin:'1rem'})}
+    ${mobile({flexDirection: 'column',width: '95vw', padding: '10px', gap:'5px', margin: '1rem auto 0'})}
 
 `
 

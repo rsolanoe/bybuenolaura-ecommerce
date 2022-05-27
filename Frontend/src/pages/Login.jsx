@@ -5,63 +5,8 @@ import {useState} from 'react'
 import { useDispatch } from 'react-redux'
 import { login } from '../redux/apiCalls';
 import { useNavigate } from 'react-router-dom';
+import { HiOutlineMail, HiOutlineLockClosed } from "react-icons/hi";
 
-
-const Container = styled.div`
-    width: 100vw;
-    height: 100vh;
-    background: linear-gradient(
-            rgba(255, 255, 255, 0.5),
-            rgba(255, 255, 255, 0.5)
-        ),
-        url("https://images.pexels.com/photos/6984650/pexels-photo-6984650.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940")
-            center;
-    background-size: cover;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-`;
-
-const Wrapper = styled.div`
-    width: 25%;
-    padding: 20px;
-    background-color: white;
-    ${mobile({ width: "90%" })}
-`;
-
-const Title = styled.h1`
-    font-size: 24px;
-    font-weight: 300;
-`;
-
-const Form = styled.form`
-    display: flex;
-    flex-direction: column;
-`;
-
-const Input = styled.input`
-    flex: 1;
-    min-width: 40%;
-    margin: 10px 0;
-    padding: 10px;
-`;
-
-const Button = styled.button`
-    width: 40%;
-    border: none;
-    padding: 15px 20px;
-    background-color: teal;
-    color: white;
-    cursor: pointer;
-    margin-bottom: 10px;
-`;
-
-const Link = styled.a`
-    margin: 5px 0px;
-    font-size: 12px;
-    text-decoration: underline;
-    cursor: pointer;
-`;
 
 const Login = () => {
 
@@ -69,6 +14,9 @@ const Login = () => {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+
+    const [emailInput, setEmailInput] = useState('')
+    const [passwordInput, setPasswordInput] = useState('')
 
     const dispatch = useDispatch();
 
@@ -78,13 +26,30 @@ const Login = () => {
         navigate(-1)
     }
 
+    const handleActiveInput = ({target}) => {
+        setEmailInput(target.name);
+    }
+
+    const handlePasswordInput = ({target}) => {
+        setPasswordInput(target.name);
+    }
+
     return (
         <Container>
             <Wrapper>
-                <Title>SIGN IN</Title>
+                <Title>Login</Title>
                 <Form>
-                    <Input type='email' placeholder="email" onChange={({target}) => setEmail(target.value)}/>
-                    <Input type='password' placeholder="password" onChange={({target}) => setPassword(target.value)}/>
+                    <label className={emailInput}>Email</label>
+                    <InputContainer className='emailContainer'>
+                        <HiOutlineMail />
+                        <Input name='email' onFocus={handleActiveInput} onBlur={()=>setEmailInput('')} type='email' placeholder="abc123@gmail.com" value={email} onChange={({target}) => setEmail(target.value)} autoComplete='off'/>
+                    </InputContainer>
+
+                    <label className={passwordInput}>Clave</label>
+                    <InputContainer>
+                        <HiOutlineLockClosed />
+                        <Input name='password' onFocus={handlePasswordInput} onBlur={()=>setPasswordInput('')} type='password' placeholder="password" value={password} onChange={({target}) => setPassword(target.value)}/>
+                    </InputContainer>
                     <Button onClick={handleLogin}>LOGIN</Button>
                     <Link>DO NOT YOU REMEMBER THE PASSWORD?</Link>
                     <Link>CREATE A NEW ACCOUNT</Link>
@@ -93,5 +58,97 @@ const Login = () => {
         </Container>
     );
 };
+
+
+const Container = styled.div`
+    height: calc(100vh - 98px);
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`;
+
+const Wrapper = styled.div`
+    width: 30%;
+    padding: 27px;
+    background-color: white;
+    box-shadow: 0 0 15px -10px gray;
+    ${mobile({ width: "90%" })}
+`;
+
+const Title = styled.h1`
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 1.2rem;
+    text-align: center;
+`;
+
+const Form = styled.form`
+    display: flex;
+    flex-direction: column;
+
+    label {
+        font-size: 12px;
+        color: #868686;
+
+        &.email + div {
+            outline: 1px solid #38d430;
+        }
+
+        &.password + div {
+            outline: 1px solid #38d430;
+        }
+    }
+
+    svg {
+        color: #868686;
+    }
+    
+`;
+
+const Input = styled.input`
+    flex: 1;
+    min-width: 40%;
+    padding: 10px;
+    border: none;
+
+    &:focus {
+        outline: none;
+    }
+
+`;
+
+const Button = styled.button`
+    width: 40%;
+    border: none;
+    padding: 15px 20px;
+    background-color: teal;
+    color: white;
+    cursor: pointer;
+    margin: 15px 0;
+    border-radius: 5px;
+`;
+
+const Link = styled.a`
+    margin: 5px 0px;
+    font-size: 12px;
+    text-decoration: underline;
+    cursor: pointer;
+`;
+
+const InputContainer = styled.div`
+    display: flex;
+    align-items: center;
+    border: 1px solid #86868668;
+    border-radius: 3px;
+    padding-left: 10px;
+    margin-bottom: 10px;
+
+    transition: all 0.1s ease;
+
+    &.emailContainer{
+        margin-bottom: 25px;
+    }
+`
 
 export default Login;

@@ -25,11 +25,7 @@ const Product = ({ item }) => {
 };
 
 const Container = styled.div`
-    /* min-width: 130px;
-    flex: 1 1 150px;
-    ${mobile({ minWidth: "100px" })} */
-
-
+    
 
     & > a {
         text-decoration: none;
@@ -42,16 +38,23 @@ const ProductInfo = styled.div`
     display: flex;
     flex-direction: column;
     gap: 10px;
+    
 
     ${mobile({ fontSize: "11px", gap: '5px' })}
     
-    p{
+    p{  
+        display: -webkit-box;
+        overflow: hidden;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 1;
         font-weight: 550;
-        padding-left: 7px;
+        padding: 0 5px;
+
+        ${mobile({ fontSize: '1em' })}
     }
 
     span {
-        padding-left: 7px;
+        padding-left: 5px;
         ${mobile({ fontSize: "11px" })}
     }
 `
@@ -68,7 +71,7 @@ const LinkContainer = styled.div`
     
     
     &:hover{
-        background-color: #ffc0cb99;
+        background-color: #e2eefa;
     }
 
     a {
@@ -87,7 +90,11 @@ const ProductContainer = styled.div`
     gap: 10px;
     margin: 7px;
     /* width: 310px; */
-    box-shadow: 0 0 2px grey;
+    box-shadow: 0 0 15px -10px grey;
+    background-color: white;
+    border-radius: 7px;
+    overflow: hidden;
+    /* border: none; */
 
     /* ${mobile({ width: "140px" })} */
     

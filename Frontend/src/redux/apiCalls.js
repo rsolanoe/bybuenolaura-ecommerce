@@ -7,11 +7,14 @@ import { userDetailsStart, userDetailsSuccess } from "./userDetailsSlice";
 import { loginfailure, loginStart, loginSuccess } from "./userSlice";
 
 
+const BASE_URL = process.env.REACT_APP_API_URL
+console.log(BASE_URL)
+
 //USER LOGIN
 export const login = async (dispatch, user) => {
     dispatch(loginStart());
     try {
-        const {data} = await axios.post('http://localhost:5000/api/auth/login', user);
+        const {data} = await axios.post(`${BASE_URL}auth/login`, user);
         console.log(data)
         dispatch(loginSuccess(data));
     } catch (error) {
@@ -25,7 +28,7 @@ export const login = async (dispatch, user) => {
 export const register = async (dispatch, user) => {
     dispatch(registerStart());///TOCA HACER ESTE SLICE
     try {
-        const {data} = await axios.post('http://localhost:5000/api/auth/register', user);
+        const {data} = await axios.post(`${BASE_URL}auth/register`, user);
         console.log(data)
         dispatch(loginSuccess(data));
     } catch (error) {
@@ -45,7 +48,7 @@ export const addOrder = async (orderInfo, token) => {
     }
 
     try {
-        const { data } = await axios.post('http://localhost:5000/api/orders', orderInfo, options)
+        const { data } = await axios.post(`${BASE_URL}orders`, orderInfo, options)
         console.log(data)
     } catch (error) {
         console.log(error)
@@ -59,11 +62,11 @@ export const getProducts = async (dispatch, category) => {
     try {
         if (category) {
             // const { data } = await axios.get(`http://localhost:5000/api/products?category=${category}&merchanId=508029&transactionState=4&referenceCode=PAGOTESTBYBUENOLAURAtest2&TX_VALUE=75000.00&currency=COP`);
-            const { data } = await axios.get(`http://localhost:5000/api/products?category=${category}`);
+            const { data } = await axios.get(`${BASE_URL}products?category=${category}`);
             console.log(data)
             dispatch(getProductSuccess(data))
         } else {
-            const { data } = await axios.get('http://localhost:5000/api/products')
+            const { data } = await axios.get(`${BASE_URL}products`)
             dispatch(getProductSuccess(data))
         }
     } catch (error) {
@@ -76,7 +79,7 @@ export const getProducts = async (dispatch, category) => {
 export const productDetails = async (dispatch, id) => {
     dispatch(productDetailStart())
     try {
-        const { data } = await axios.get(`http://localhost:5000/api/products/find/${id}`);
+        const { data } = await axios.get(`${BASE_URL}products/find/${id}`);
         dispatch(productDetailSuccess(data))
     } catch (error) {
         dispatch(productDetailfailure())

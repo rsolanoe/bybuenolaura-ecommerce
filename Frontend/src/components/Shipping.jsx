@@ -105,22 +105,26 @@ const Shipping = () => {
 };
 
 const Container = styled.div`
-    height: calc(100vh - 88px);
+    /* height: calc(100vh - 88px); */
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 2rem 0;
 
-    ${mobile({ padding: "20px", alignItems: "flex-start" })}
+    ${mobile({ padding: "20px", alignItems: "flex-start", padding: '2rem' })}
 `;
 
 const Form = styled.form`
     display: flex;
     flex-direction: column;
-    width: 450px;
+    width: 400px;
     gap: 18px;
+    background-color: white;
     box-shadow: 0 0 15px -10px rgba(0, 0, 0, 0.75);
     padding: 20px;
+
+    ${mobile({ width: '340px' })}
 
     span {
         color: teal;

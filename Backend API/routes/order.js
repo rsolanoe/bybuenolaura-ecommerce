@@ -48,7 +48,7 @@ router.delete("/:id", verifyTokenAndAdmin, async (req, res) => {
 router.get("/find/:userid", verifyTokenAndAuthorization, async (req, res) => {
     try {
         console.log('LOG 1', req.params.userid)
-        const orders = await Order.find({ userId: req.params.userid });
+        const orders = await Order.find({ userId: req.params.userid }).sort({ 'createdAt': -1});
         console.log('LOG 2',orders)
         res.status(200).json(orders);
     } catch (error) {
@@ -59,7 +59,7 @@ router.get("/find/:userid", verifyTokenAndAuthorization, async (req, res) => {
 //GET ALL
 router.get("/", verifyTokenAndAdmin, async (req, res) => {
     try {
-        const orders = await Order.find();
+        const orders = await Order.find().sort({ 'createdAt': -1});
         res.status(200).json(orders);
     } catch (error) {
         res.status(500).json(error);

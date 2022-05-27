@@ -1,20 +1,12 @@
-import Navbar from "../components/Navbar";
-import Announcement from "../components/Announcement";
-import Newsletter from "../components/Newsletter";
 import Products from "../components/Products";
-import Footer from "../components/Footer";
 import styled from "styled-components";
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useState } from "react";
 import { mobile } from "../responsive";
 
 const ProductList = () => {
 
     window.scrollTo(0, 0)
-
-    //* Tiene el mismo resultado que useParams()
-    /*  const {pathname} = useLocation();
-    console.log(pathname.split('/')[2]); */
 
     const { category } = useParams();
 

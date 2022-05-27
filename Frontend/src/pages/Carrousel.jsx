@@ -6,8 +6,12 @@ import { clearCart } from "../redux/cartSlice";
 import { userInfo } from "../redux/userSlice";
 import { addOrder } from "../redux/apiCalls";
 
+const BASE_URL = process.env.REACT_APP_API_URL
+
 const Carrousel = () => {
     window.scrollTo(0, 0);
+
+    
 
     const baseurl = window.location.search
     const dispatch = useDispatch();
@@ -20,7 +24,7 @@ const Carrousel = () => {
     useEffect(() => {
         const getPayuData = async () => {
             const { data } = await axios.get(
-                `http://localhost:5000/api/payu${baseurl}`
+                `${BASE_URL}payu${baseurl}`
             );
             setOrderInfo(data)
         };

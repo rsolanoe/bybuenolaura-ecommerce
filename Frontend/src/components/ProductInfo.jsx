@@ -56,11 +56,7 @@ const ProductInfo = () => {
                 </ImgContainer>
                 <InfoContainer>
                     <Title>{product.title}</Title>
-                    <Desc
-                        dangerouslySetInnerHTML={{
-                            __html: product.description,
-                        }}
-                    ></Desc>
+                    <Desc dangerouslySetInnerHTML={{__html: product.description}}></Desc>
                     <Price>$ {product.price}</Price>
                     <FilterContainer>
                         <Filter>
@@ -77,18 +73,9 @@ const ProductInfo = () => {
 
                     <AddContainer>
                         <AmountContainer>
-                            <IoRemoveSharp
-                                onClick={() =>
-                                    amount > 1 &&
-                                    setAmount((preValue) => preValue - 1)
-                                }
-                            />
+                            <IoRemoveSharp onClick={() => amount > 1 && setAmount((preValue) => preValue - 1)}/>
                             <Amount>{amount}</Amount>
-                            <IoAddSharp
-                                onClick={() =>
-                                    setAmount((preValue) => preValue + 1)
-                                }
-                            />
+                            <IoAddSharp onClick={() => setAmount((preValue) => preValue + 1) }/>
                         </AmountContainer>
 
                         <Button onClick={handleClick}>ADD TO CART</Button>
@@ -131,27 +118,40 @@ const InfoContainer = styled.div`
 const Title = styled.h1`
     font-weight: 600;
     font-size: 1.7rem;
+
+    ${mobile({ fontSize: "1.3rem" })}
 `;
 
 const Desc = styled.div`
     margin: 20px 0;
     font-size: 1.2rem;
-
+    
     h5 {
         font-size: 1.4rem;
         margin-bottom: 1rem;
+
+        ${mobile({ fontSize: "1.2rem" })}
+    }
+        
+    p {
+
+        ${mobile({ fontSize: "0.9rem" })}
     }
 
     li {
         font-size: 1rem;
         margin-bottom: 0.2rem;
         list-style: none;
+
+        ${mobile({ fontSize: "0.9rem" })}
     }
 `;
 
 const Price = styled.span`
-    font-weight: 100;
+    font-weight: 600;
     font-size: 2rem;
+
+    ${mobile({ fontSize: "1.2rem" })}
 `;
 
 const FilterContainer = styled.div`
@@ -168,7 +168,7 @@ const Filter = styled.div`
 `;
 
 const FilterTitle = styled.span`
-    font-style: 20px;
+    font-size: 20px;
     font-weight: 200;
 `;
 
@@ -210,6 +210,8 @@ const Amount = styled.span`
     align-items: center;
     justify-content: center;
     margin: 0 8px;
+
+    ${mobile({ fontSize: "15px", width: '30px', height: '30px' })}
 `;
 
 const Button = styled.button`
@@ -220,6 +222,8 @@ const Button = styled.button`
     font-weight: 600;
     border-radius: 5px;
     transition: all 0.1s ease-in-out;
+
+    ${mobile({ padding: "10px" })}
 
     &:hover {
         background-color: teal;

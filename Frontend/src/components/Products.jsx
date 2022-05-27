@@ -54,14 +54,10 @@ const Products = ({ cat, filters, merchantid }) => {
 
 const Container = styled.div`
     padding: 20px 80px;
-    /* display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between; */
-
     display: grid;
     grid-template-columns: repeat(4, 1fr);
 
-    ${mobile({ gridTemplateColumns: 'repeat(2, 1fr)', padding: '20px' })}
+    ${mobile({ gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', padding: '20px' })}
 `;
 
 export default Products;

@@ -23,7 +23,7 @@ const CustomerInfoContainer = styled.div`
     align-items: center;
 
 
-    ${mobile({width: '250px', justifyContent: 'flex-start'})}
+    ${mobile({width: '95%', justifyContent: 'flex-start'})}
 
     & > .info {
         display: flex;
