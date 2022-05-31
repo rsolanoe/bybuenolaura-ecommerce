@@ -13,7 +13,6 @@ const BASE_URL = process.env.REACT_APP_API_URL
 
 
 const Profile = () => {
-    // window.scrollTo(0, 0);
 
     const { _id: userId, accessToken } = useSelector(
         (state) => state.persistedReducer.user?.currentUser
@@ -48,6 +47,7 @@ const Profile = () => {
     }
 
     useEffect(() => {
+        window.scrollTo(0, 0);
         const getOrders = async () => {
             setOrders({ ...orders, isLoading: true })
             const { data } = await axios.get(`${BASE_URL}orders/find/${userId}`,{
@@ -89,6 +89,7 @@ const Profile = () => {
                                 orderId={order._id}
                                 orderDate={order.createdAt}
                                 orderPrice={order.totalPrice}
+                                orderQuantity={order.orderItems}
                                 handleClick={handleClick}
                                 index={index}
                             />

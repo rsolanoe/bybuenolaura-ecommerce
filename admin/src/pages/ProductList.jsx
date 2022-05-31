@@ -16,8 +16,8 @@ const ProductList = () => {
     }
 
     const columns = [
-        { field: 'id', headerName: 'ID', width: 90 },
-        { field: 'product', headerName: 'Product', width: 200, renderCell: ({row}) => {
+        { field: 'id', headerName: 'ID', width: 200 },
+        { field: 'product', headerName: 'Product', width: 350, renderCell: ({row}) => {
             return (
                 <ProductListItem>
                     <img src={row.image} alt="" />
@@ -25,9 +25,9 @@ const ProductList = () => {
                 </ProductListItem>
             )
         } },
-        { field: 'stock', headerName: 'Stock', width: 200 },
-        { field: 'status', headerName: 'Status', width: 120 },
-        { field: 'price', headerName: 'Price', width: 160 },
+        { field: 'stock', headerName: 'Stock', width: 45 },
+        { field: 'status', headerName: 'Status', width: 80 },
+        { field: 'price', headerName: 'Price', width: 120},
         { field: 'action', headerName: 'Action', width: 150, renderCell: ({row}) => {
             return (
                 <>

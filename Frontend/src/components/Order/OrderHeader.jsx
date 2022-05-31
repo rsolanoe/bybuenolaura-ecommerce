@@ -1,22 +1,42 @@
 import React from "react";
 import styled from "styled-components";
-import moment from 'moment'
+import moment from "moment";
 import { mobile } from "../../responsive";
 
-const Header = ({orderId, orderDate, orderPrice, handleClick, index}) => {
+const Header = ({
+    orderId,
+    orderDate,
+    orderPrice,
+    handleClick,
+    index,
+    orderQuantity,
+}) => {
     return (
         <HeaderContainer>
             <HeaderItem>
                 <p>Pedido No. {orderId}</p>
-                <span>Realizado el {moment(orderDate).format("dddd, D MMMM YYYY")}
+                <span>
+                    Realizado el {moment(orderDate).format("dddd, D MMMM YYYY")}
                 </span>
             </HeaderItem>
             <HeaderItem className="cantidad">
-                <p><span>Cantidad: </span>1 producto</p>
+                <p>
+                    <span>Cantidad: </span>
+                    {orderQuantity.reduce((acc, order) => {
+                        return acc + order.quantity;
+                    }, 0)}{" "}
+                    {orderQuantity.reduce((acc, order) => {
+                        return acc + order.quantity;
+                    }, 0) < 2 ? 'Producto' : 'Productos'}
+                </p>
             </HeaderItem>
             <HeaderItem className="cantidad">
-                <p><span>Total del Pedido: </span> $ {orderPrice}</p>
-                <p onClick={() => handleClick(index)} style={{
+                <p>
+                    <span>Total del Pedido: </span> $ {orderPrice}
+                </p>
+                <p
+                    onClick={() => handleClick(index)}
+                    style={{
                         color: "teal",
                         fontWeight: "700",
                         cursor: "pointer",
@@ -28,7 +48,6 @@ const Header = ({orderId, orderDate, orderPrice, handleClick, index}) => {
         </HeaderContainer>
     );
 };
-
 
 const HeaderItem = styled.div`
     display: flex;
@@ -46,26 +65,25 @@ const HeaderItem = styled.div`
     }
 
     &.cantidad {
-        
         p {
             font-weight: 500;
 
-            span{
+            span {
                 color: gray;
                 font-weight: 300;
             }
         }
     }
-`
+`;
 
 const HeaderContainer = styled.div`
-    display: flex; 
+    display: flex;
     justify-content: space-between;
     background-color: #f0f0f0;
     padding: 10px;
     border-bottom: 1px solid lightgray;
 
-    ${mobile({flexDirection: 'column'})}
-`
+    ${mobile({ flexDirection: "column" })}
+`;
 
 export default Header;

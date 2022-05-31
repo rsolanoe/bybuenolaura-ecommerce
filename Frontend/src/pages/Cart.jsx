@@ -181,14 +181,14 @@ const Bottom = styled.div`
 
 const Info = styled.div`
     flex: 3;
-    background-color: white;
-    border-radius: 13px;
-    box-shadow: 0 0 15px -10px gray;
 `;
 
 const Product = styled.div`
     display: flex;
     justify-content: space-between;
+    background-color: white;
+    
+    box-shadow: 0 0 15px -10px gray;
     /* border-bottom: 1px solid lightgray; */
 
     ${mobile({ flexDirection: 'column', gap: '5px', marginBottom: '0.5rem',paddingBottom: '0.5rem' })}
