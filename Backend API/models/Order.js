@@ -4,6 +4,10 @@ const { Schema } = mongoose;
 const OrderSchema = new Schema(
     {
         userId: { type: String, required: true, },
+        fName: { type: String, required: true },
+        lName: { type: String, required: true },
+        // IdNumber: { type: Number, required: true },
+        phoneNumber: { type: Number, required: true },
         orderItems: [
             {
                 title: { type: String, required: true },

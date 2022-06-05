@@ -5,6 +5,7 @@ router.get("/", async (req, res) => {
     const queries = req.query
     try {
         if (queries) {
+            console.log(queries)
             return res.status(200).json(queries);
         }
     } catch (error) {

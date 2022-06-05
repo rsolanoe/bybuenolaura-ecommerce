@@ -23,7 +23,7 @@ const Navbar = () => {
                     <ImgContainer>
                         <img src="https://res.cloudinary.com/dezaizbpb/image/upload/v1652450221/test/WhatsApp_Image_2022-05-12_at_10.00.12_PM_qng18y.jpg" />
                     </ImgContainer>
-                    <Language>EN</Language>
+                    <Language><Link to={"/productos"}>PRODUCTOS</Link></Language>
                     <SearchContainer>
                         <Input />
                         <FaSearch />
@@ -42,7 +42,7 @@ const Navbar = () => {
                             <UsernameContainer
                                 onMouseEnter={() => setHide(false)}
                             >
-                                <p>Hola, pello</p>
+                                <p>Hola, {currentUser.fName}</p>
                                 <ArrowContainer>
                                     <RiArrowDownSLine />
                                 </ArrowContainer>
@@ -66,6 +66,7 @@ const Navbar = () => {
                                 >
                                     Cerrar sesión
                                 </ProfileOption>
+                                <ProfileOption><Link to={"/productos"}>PRODUCTOS</Link></ProfileOption>
                             </UserDropDownMenu>
                         </OptionsContainer>
                     ) : (
@@ -76,6 +77,7 @@ const Navbar = () => {
                             <Link to="/login">
                                 <MenuItem>INICIAR SESIÓN</MenuItem>
                             </Link>
+                            
                         </>
                     )}
 
@@ -206,6 +208,11 @@ const ImgContainer = styled.div`
 const Language = styled.span`
     font-size: 14px;
     cursor: pointer;
+
+    & a {
+        color: black;
+        text-decoration: none;
+    }
 `;
 
 const SearchContainer = styled.div`

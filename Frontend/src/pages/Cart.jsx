@@ -6,9 +6,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { decreaseCart, increaseCart, removeProduct } from "../redux/cartSlice";
 import { mobile } from "../responsive";
 import { useNavigate } from "react-router-dom";
+import EmptyCart from "../components/Cart/EmptyCart";
+import Footer from "../components/Footer";
 
 const Cart = () => {
     const cart = useSelector((state) => state.persistedReducer.cart);
+    console.log(cart);
+    
+    const { currentUser } = useSelector((state) => state.persistedReducer.user);
 
 
     const navigate = useNavigate();
@@ -16,7 +21,15 @@ const Cart = () => {
     const dispatch = useDispatch();
 
     const handleClick = () => {
-        navigate('/shipping')
+
+        console.log(currentUser);
+
+        if( currentUser ){
+            return navigate('/shipping')
+        }
+
+        navigate('/login')
+
     }
 
     const handleRemoveFromCart = (product) => {
@@ -32,93 +45,99 @@ const Cart = () => {
     }
 
     return (
-        <Container>
-            <Wrapper>
-                <Title>CARRITO</Title>
-                <Top>
-                    <TopButton>SEGUIR COMPRANDO</TopButton>
-                    <TopTexts>
-                        <TopText>Shopping Bag({cart.quantity})</TopText>
-                        <TopText>Your Whislist (0)</TopText>
-                    </TopTexts>
-                    <TopButton type="filled">PROCEDER AL PAGO</TopButton>
-                </Top>
-
-                {cart.products.length === 0 
-                    ? (<h1>Cart empty...</h1>) 
-                    : (
-                    <Bottom>
-                        <Info>
-                            {cart.products.map((product) => (
-                                <Product key={product._id}>
-                                    <ProductDetail>
-                                        <img src={product.img} />
-                                        <Details>
-                                            <ProductDetails>
-                                                <ProductName>
-                                                    <p><b>Product: </b>{product.title}</p>
-                                                </ProductName>
-                                                <ProductID>
-                                                    <p><b>ID: </b>{product._id}</p>
-                                                </ProductID>
-                                                <ProcutSize>
-                                                    <b>Size:</b> {product.size}
-                                                </ProcutSize>
-                                            </ProductDetails>
-                                            <FaRegTrashAlt onClick={()=> handleRemoveFromCart(product)} />
-                                        </Details>
-                                    </ProductDetail>
-                                    <PriceDetail>
-                                        <ProductAmountContainer>
-                                            <IoRemoveSharp onClick={()=> handleDecreaseQuantity(product)} />
-                                            <ProductAmount>
-                                                {product.quantity}
-                                            </ProductAmount>
-                                            <IoAddSharp onClick={()=> handleIncreaseQuantity(product)} />
-                                        </ProductAmountContainer>
-                                        <ProductPrice>
-                                            $ {product.price * product.quantity}
-                                        </ProductPrice>
-                                    </PriceDetail>
-                                </Product>
-                            ))}
-                        </Info>
-                        <Summary>
-                            <SummaryInfo>
-                                <SummaryTitle>RESUMEN DEL PEDIDO</SummaryTitle>
-                                <SummaryItem>
-                                    <SummaryItemText>
-                                        Subtotal
-                                    </SummaryItemText>
-                                    <SummaryItemPrice>
-                                        $ {cart.total}
-                                    </SummaryItemPrice>
-                                </SummaryItem>
-                                <SummaryItem>
-                                    <SummaryItemText>
-                                        Estimated Shipping
-                                    </SummaryItemText>
-                                    <SummaryItemPrice>$ 5.90</SummaryItemPrice>
-                                </SummaryItem>
-                                <SummaryItem>
-                                    <SummaryItemText>
-                                        Shipping Discount
-                                    </SummaryItemText>
-                                    <SummaryItemPrice>$ -5.90</SummaryItemPrice>
-                                </SummaryItem>
-                                <SummaryItem type="total">
-                                    <SummaryItemText className="totalPrice" >Total</SummaryItemText>
-                                    <SummaryItemPrice className="totalPrice">
-                                        $ {cart.total}
-                                    </SummaryItemPrice>
-                                </SummaryItem>
-                                <SummaryButton onClick={handleClick} >PROCEDER AL PAGO</SummaryButton>
-                            </SummaryInfo>
-                        </Summary>
-                    </Bottom>
-                )}
-            </Wrapper>
-        </Container>
+        <>
+            <Container>
+                <Wrapper>
+                    <Title>CARRITO</Title>
+                    {
+                        cart.products.length > 0 &&
+                            <Top>
+                                <TopButton>SEGUIR COMPRANDO</TopButton>
+                                <TopTexts>
+                                    <TopText>Shopping Bag({cart.quantity})</TopText>
+                                    <TopText>Your Whislist (0)</TopText>
+                                </TopTexts>
+                                <TopButton type="filled" onClick={handleClick} >PROCEDER AL PAGO</TopButton>
+                            </Top>
+                     }
+            
+                    {cart.products.length === 0 
+                        ? <EmptyCart /> 
+                        : (
+                        <Bottom>
+                            <Info>
+                                {cart.products.map((product) => (
+                                    <Product key={product._id}>
+                                        <ProductDetail>
+                                            <img src={product.img} />
+                                            <Details>
+                                                <ProductDetails>
+                                                    <ProductName>
+                                                        <p><b>Product: </b>{product.title}</p>
+                                                    </ProductName>
+                                                    <ProductID>
+                                                        <p><b>ID: </b>{product._id}</p>
+                                                    </ProductID>
+                                                    <ProcutSize>
+                                                        <b>Size:</b> {product.size}
+                                                    </ProcutSize>
+                                                </ProductDetails>
+                                                <FaRegTrashAlt onClick={()=> handleRemoveFromCart(product)} />
+                                            </Details>
+                                        </ProductDetail>
+                                        <PriceDetail>
+                                            <ProductAmountContainer>
+                                                <IoRemoveSharp onClick={()=> handleDecreaseQuantity(product)} />
+                                                <ProductAmount>
+                                                    {product.quantity}
+                                                </ProductAmount>
+                                                <IoAddSharp onClick={()=> handleIncreaseQuantity(product)} />
+                                            </ProductAmountContainer>
+                                            <ProductPrice>
+                                                $ {product.price * product.quantity}
+                                            </ProductPrice>
+                                        </PriceDetail>
+                                    </Product>
+                                ))}
+                            </Info>
+                            <Summary>
+                                <SummaryInfo>
+                                    <SummaryTitle>RESUMEN DEL PEDIDO</SummaryTitle>
+                                    <SummaryItem>
+                                        <SummaryItemText>
+                                            Subtotal
+                                        </SummaryItemText>
+                                        <SummaryItemPrice>
+                                            $ {cart.total}
+                                        </SummaryItemPrice>
+                                    </SummaryItem>
+                                    <SummaryItem>
+                                        <SummaryItemText>
+                                            Estimated Shipping
+                                        </SummaryItemText>
+                                        <SummaryItemPrice>$ 5.90</SummaryItemPrice>
+                                    </SummaryItem>
+                                    <SummaryItem>
+                                        <SummaryItemText>
+                                            Shipping Discount
+                                        </SummaryItemText>
+                                        <SummaryItemPrice>$ -5.90</SummaryItemPrice>
+                                    </SummaryItem>
+                                    <SummaryItem type="total">
+                                        <SummaryItemText className="totalPrice" >Total</SummaryItemText>
+                                        <SummaryItemPrice className="totalPrice">
+                                            $ {cart.total}
+                                        </SummaryItemPrice>
+                                    </SummaryItem>
+                                    <SummaryButton onClick={handleClick} >PROCEDER AL PAGO</SummaryButton>
+                                </SummaryInfo>
+                            </Summary>
+                        </Bottom>
+                    )}
+                </Wrapper>
+            </Container>
+            <Footer />
+        </>
     );
 };
 

@@ -1,64 +1,80 @@
-import React from 'react'
+import React from "react";
 import styled from "styled-components";
 import { mobile } from "../responsive";
-import {useState} from 'react'
-import { useDispatch } from 'react-redux'
-import { login } from '../redux/apiCalls';
-import { useNavigate } from 'react-router-dom';
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { login } from "../redux/apiCalls";
+import { useNavigate, Link } from "react-router-dom";
 import { HiOutlineMail, HiOutlineLockClosed } from "react-icons/hi";
 
-
 const Login = () => {
+    const navigate = useNavigate();
 
-    const navigate = useNavigate()
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
 
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-
-    const [emailInput, setEmailInput] = useState('')
-    const [passwordInput, setPasswordInput] = useState('')
+    const [emailInput, setEmailInput] = useState("");
+    const [passwordInput, setPasswordInput] = useState("");
 
     const dispatch = useDispatch();
 
     const handleLogin = (e) => {
         e.preventDefault();
-        login(dispatch, { email, password })
-        navigate(-1)
-    }
+        login(dispatch, { email, password });
+        // navigate(-1)
+    };
 
-    const handleActiveInput = ({target}) => {
+    const handleActiveInput = ({ target }) => {
         setEmailInput(target.name);
-    }
+    };
 
-    const handlePasswordInput = ({target}) => {
+    const handlePasswordInput = ({ target }) => {
         setPasswordInput(target.name);
-    }
+    };
 
     return (
         <Container>
             <Wrapper>
                 <Title>Login</Title>
-                <Form>
+                <Form onSubmit={handleLogin}>
                     <label className={emailInput}>Email</label>
-                    <InputContainer className='emailContainer'>
+                    <InputContainer className="emailContainer">
                         <HiOutlineMail />
-                        <Input name='email' onFocus={handleActiveInput} onBlur={()=>setEmailInput('')} type='email' placeholder="abc123@gmail.com" value={email} onChange={({target}) => setEmail(target.value)} autoComplete='off'/>
+                        <Input
+                            name="email"
+                            onFocus={handleActiveInput}
+                            onBlur={() => setEmailInput("")}
+                            type="email"
+                            placeholder="abc123@gmail.com"
+                            value={email}
+                            onChange={({ target }) => setEmail(target.value)}
+                            autoComplete="off"
+                            required
+                        />
                     </InputContainer>
 
                     <label className={passwordInput}>Clave</label>
                     <InputContainer>
                         <HiOutlineLockClosed />
-                        <Input name='password' onFocus={handlePasswordInput} onBlur={()=>setPasswordInput('')} type='password' placeholder="password" value={password} onChange={({target}) => setPassword(target.value)}/>
+                        <Input
+                            name="password"
+                            onFocus={handlePasswordInput}
+                            onBlur={() => setPasswordInput("")}
+                            type="password"
+                            placeholder="password"
+                            value={password}
+                            onChange={({ target }) => setPassword(target.value)}
+                            required
+                        />
                     </InputContainer>
-                    <Button onClick={handleLogin}>LOGIN</Button>
-                    <Link>DO NOT YOU REMEMBER THE PASSWORD?</Link>
-                    <Link>CREATE A NEW ACCOUNT</Link>
+                    <Button type="submit" >LOGIN</Button>
+                    {/* <Link>DO NOT YOU REMEMBER THE PASSWORD?</Link> */}
+                    <Link to={"/register"}>CREATE A NEW ACCOUNT</Link>
                 </Form>
             </Wrapper>
         </Container>
     );
 };
-
 
 const Container = styled.div`
     height: calc(100vh - 98px);
@@ -103,7 +119,14 @@ const Form = styled.form`
     svg {
         color: #868686;
     }
-    
+
+    a {
+        margin: 5px 0px;
+        font-size: 12px;
+        text-decoration: underline;
+        cursor: pointer;
+        color: #868686;
+    }
 `;
 
 const Input = styled.input`
@@ -115,7 +138,6 @@ const Input = styled.input`
     &:focus {
         outline: none;
     }
-
 `;
 
 const Button = styled.button`
@@ -129,12 +151,12 @@ const Button = styled.button`
     border-radius: 5px;
 `;
 
-const Link = styled.a`
-    margin: 5px 0px;
-    font-size: 12px;
-    text-decoration: underline;
-    cursor: pointer;
-`;
+// const Link = styled.a`
+//     margin: 5px 0px;
+//     font-size: 12px;
+//     text-decoration: underline;
+//     cursor: pointer;
+// `;
 
 const InputContainer = styled.div`
     display: flex;
@@ -146,9 +168,9 @@ const InputContainer = styled.div`
 
     transition: all 0.1s ease;
 
-    &.emailContainer{
+    &.emailContainer {
         margin-bottom: 25px;
     }
-`
+`;
 
 export default Login;

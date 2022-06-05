@@ -8,6 +8,7 @@ import LoadingSpinner from "../components/LoadingError/LoadingSpinner";
 import OrderHeader from '../components/Order/OrderHeader'
 import OrderBodyInfo from '../components/Order/OrderBody'
 import OrderShipping from '../components/Order/OrderShipping'
+import Footer from "../components/Footer";
 
 const BASE_URL = process.env.REACT_APP_API_URL
 
@@ -26,6 +27,7 @@ const Profile = () => {
 
     const [orders, setOrders] = useState(initialState);
     const {order, isLoading, isError} = orders
+    console.log(order);
 
     const [show, setShow] = useState([0])
 
@@ -60,74 +62,80 @@ const Profile = () => {
     }, []);
 
     return (
-        <Container>
-            <LeftContainer>
-                <ProfileContainer>
-                    <TopContainer></TopContainer>
-                    <BottomContainer>
-                        <UserInfoContainer>
-                            <FaUserAlt />
-                            <NameContainer>
-                                <p>Admin</p>
-                                <p>Joined Janaury 4, 2022</p>
-                            </NameContainer>
-                        </UserInfoContainer>
-                        <OptionList><p>Profile Settings</p></OptionList>
-                        <OptionList><p>Order List</p></OptionList>
-                    </BottomContainer>
-                </ProfileContainer>
-            </LeftContainer>
-            <RightContainer>
-                <p>Pedidos</p>
-
-                {
-                    isLoading ? <LoadingSpinner /> :(
-
-                    order?.map((order, index) => (
-                        <OrderContainer key={order._id}>
-                            <OrderHeader 
-                                orderId={order._id}
-                                orderDate={order.createdAt}
-                                orderPrice={order.totalPrice}
-                                orderQuantity={order.orderItems}
-                                handleClick={handleClick}
-                                index={index}
-                            />
-
-                            <OrderBody variant={show.includes(index) ? 'okey' : null}>
-                                <OrderBodyHeader>
-                                    <p className="bigger">Producto</p>
-                                    <p className="hideLabel">Valor</p>
-                                    <p className="hideLabel">Cantidad</p>
-                                    <p className="hideLabel" style={{textAlign: 'right'}}>Subtotal</p>
-                                </OrderBodyHeader>
-                            
-                                {
-                                    order.orderItems?.map(item => (
-                                        <OrderBodyInfo 
-                                            key={item._id}
-                                            productImg={item.img}
-                                            productTitle={item.title}
-                                            productId={item._id}
-                                            productPrice={item.price}
-                                            productQuantity={item.quantity}
-                                        />
-                                    ))
-                                }
-
-                                <OrderShipping 
-                                    address={order.shippingAddress.address}
-                                    city={order.shippingAddress.city}
-                                    departamento={order.shippingAddress.departamento}
+        <>
+            <Container>
+                <LeftContainer>
+                    <ProfileContainer>
+                        <TopContainer></TopContainer>
+                        <BottomContainer>
+                            <UserInfoContainer>
+                                <FaUserAlt />
+                                <NameContainer>
+                                    <p>Admin</p>
+                                    <p>Joined Janaury 4, 2022</p>
+                                </NameContainer>
+                            </UserInfoContainer>
+                            <OptionList><p>Profile Settings</p></OptionList>
+                            <OptionList><p>Order List</p></OptionList>
+                        </BottomContainer>
+                    </ProfileContainer>
+                </LeftContainer>
+                <RightContainer>
+                    <p>Pedidos</p>
+            
+                    {
+                        isLoading ? <LoadingSpinner /> :(
+            
+                        order?.map((order, index) => (
+                            <OrderContainer key={order._id}>
+                                <OrderHeader 
+                                    orderId={order._id}
+                                    orderDate={order.createdAt}
                                     orderPrice={order.totalPrice}
+                                    orderQuantity={order.orderItems}
+                                    handleClick={handleClick}
+                                    index={index}
                                 />
-                            </OrderBody>
-                        </OrderContainer>
-                    ))
-                    )
-                }
-            </RightContainer>
-        </Container>
+            
+                                <OrderBody variant={show.includes(index) ? 'okey' : null}>
+                                    <OrderBodyHeader>
+                                        <p className="bigger">Producto</p>
+                                        <p className="hideLabel">Valor</p>
+                                        <p className="hideLabel">Cantidad</p>
+                                        <p className="hideLabel" style={{textAlign: 'right'}}>Subtotal</p>
+                                    </OrderBodyHeader>
+                                
+                                    {
+                                        order.orderItems?.map(item => (
+                                            <OrderBodyInfo 
+                                                key={item._id}
+                                                productImg={item.img}
+                                                productTitle={item.title}
+                                                productId={item._id}
+                                                productPrice={item.price}
+                                                productQuantity={item.quantity}
+                                            />
+                                        ))
+                                    }
+            
+                                    <OrderShipping 
+                                        fName={order.fName}
+                                        lName={order.lName}
+                                        phoneNumber={order.phoneNumber}
+                                        address={order.shippingAddress.address}
+                                        city={order.shippingAddress.city}
+                                        departamento={order.shippingAddress.departamento}
+                                        orderPrice={order.totalPrice}
+                                    />
+                                </OrderBody>
+                            </OrderContainer>
+                        ))
+                        )
+                    }
+                </RightContainer>
+            </Container>
+            <Footer />
+        </>
     );
 };
 

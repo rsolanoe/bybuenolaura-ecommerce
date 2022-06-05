@@ -1,9 +1,33 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Visibility } from "@mui/icons-material";
+import axios from 'axios'
 
 
 const WidgetSm = () => {
+
+    const [users, setUsers] = useState([])
+
+    useEffect(() => {
+
+        // const token = JSON.parse(JSON.parse(localStorage.getItem('persist:root')).user).currentUser.accessToken
+
+        // const getUsers = async () => {
+        //     const { data } = await axios.get('http://localhost:5000/api/users?new=true', {
+        //         headers: {
+        //             token: `Bearer ${token}`
+        //         }
+        //     })
+        //     console.log(data);
+
+        //     setUsers(data)
+        // }
+
+        // getUsers()
+
+    }, [])
+    
+
     return (
         <WidgetSmContainer>
             <Title>New Join Members</Title>

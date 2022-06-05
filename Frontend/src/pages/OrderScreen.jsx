@@ -7,14 +7,25 @@ import OrderItem from '../components/OrderItem';
 import { useSelector } from "react-redux";
 import { mobile } from '../responsive';
 import md5 from 'md5'
+import { useNavigate } from 'react-router-dom';
+import Footer from "../components/Footer";
 
 
 
 const OrderScreen = () => {
 
+    const { currentUser } = useSelector((state) => state.persistedReducer.user);
+
+    const navigate = useNavigate()
+
+    if (!currentUser) {
+        navigate('/')
+    }
+
     const {products, total} = useSelector(state => state.persistedReducer.cart);
     const {name, lastName, phoneNumber, address, neighborhood, departamento, municipio} = useSelector(state => state.persistedReducer.user.customerInfo);
     const {email} = useSelector(state => state.persistedReducer.user.currentUser);
+    
 
     const [ signature, setSignature ] = useState('')
     const [ secretCode, setSecretCode ] = useState('')
@@ -31,82 +42,87 @@ const OrderScreen = () => {
         generateSignature()
 
     }, [])
+
+    
        
     return (
-        <Container>
-            <TopContainer>
-                <OrderItem icon={<FaUserAlt/>} title='Cliente' infoTop={name + ' ' + lastName} infoBottom={email}  />
-                <OrderItem icon={<MdLocalShipping/>} title='Order info' infoTop={`${municipio} - ${departamento}`} infoBottom={phoneNumber}  />
-                <OrderItem icon={<IoLocationSharp/>} title='Deliver to' infoTop={address} infoBottom={neighborhood}  />
-            </TopContainer>
-            <BottomContainer>
-                <ProductsContainer>
-                    {
-                        products.map(product => (
-                            
-                                <ProductContainer key={product.title}>
-                                    <ProductInfoContainer>
-                                        <ProductImgContainer><img src={product.img} alt={product.title} /></ProductImgContainer>
-                                        <p>{product.title}</p>
-                                    </ProductInfoContainer>
-                                    <ProductPriceContainer>
-                                        <QuantityContainer>
-                                            <p>Quantity</p>
-                                            <p>{product.quantity}</p>
-                                        </QuantityContainer>
-                                        <PriceContainer>
-                                            <p>Subtotal</p>
-                                            <p>{product.quantity * product.price}</p>
-                                        </PriceContainer>
-                                    </ProductPriceContainer>
-                                </ProductContainer>
-                            
-                        ))
-                    }
-                </ProductsContainer>
-
-                <DetailContainer>
-                    <OrderInfoContainer>
-                        <table>
-                            <tr>
-                                <td>Products</td>
-                                <td>${total}</td>
-                            </tr>
-                            <tr>
-                                <td>Shipping</td>
-                                <td>$0</td>
-                            </tr>
-                            <tr>
-                                <td>Total</td>
-                                <td>${total}</td>
-                            </tr>
-                        </table>
-                    </OrderInfoContainer>
-                    <form method="post" action="https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu/">
-                        <input name="merchantId"         type="hidden"  value="508029"   /> {/* esta info viende de la cuenta de PayU cuando te registras */}
-                        <input name="accountId"          type="hidden"  value="512321" /> {/* esta info viende de la cuenta de PayU cuando te registras */}
-                        <input name="description"        type="hidden"  value="baq1rosolano"  />
-                        <input name="referenceCode"      type="hidden"  value={secretCode} />
-                        <input name="amount"             type="hidden"  value={total}   />
-                        <input name="tax"                type="hidden"  value="0"  />
-                        <input name="taxReturnBase"      type="hidden"  value="0" />
-                        <input name="currency"           type="hidden"  value="COP" />
-                        <input name="signature"          type="hidden"  value={signature} /> {/* hay que encriptar y concatenar con MD5 */}
-                        <input name="test"               type="hidden"  value="0" />
-                        <input name="buyerEmail"         type="hidden"  value="rjsolanoe@gmail.com" /> {/* este email viene de la pagina */}
-                        <input name="responseUrl"        type="hidden"  value="http://localhost:3000/payu" />
-                        <input name="confirmationUrl"    type="hidden"  value="https://bybuenolaurae.herokuapp.com/payufinish" />
-                        <input name="shippingAddress"    type="hidden"  value={address}   />
-                        <input name="shippingCity"       type="hidden"  value={municipio} />
-                        <input name="shippingCountry"    type="hidden"  value="CO"  />{/* user gives this info */}
-                        <Input name="Submit"             type="submit"  value="Pagar" />
-                    </form>
-                </DetailContainer>
-
-            </BottomContainer>
-
+       <>
+            <Container>
+                <TopContainer>
+                    <OrderItem icon={<FaUserAlt/>} title='Cliente' infoTop={name + ' ' + lastName} infoBottom={email}  />
+                    <OrderItem icon={<MdLocalShipping/>} title='Order info' infoTop={`${municipio} - ${departamento}`} infoBottom={phoneNumber}  />
+                    <OrderItem icon={<IoLocationSharp/>} title='Deliver to' infoTop={address} infoBottom={neighborhood}  />
+                </TopContainer>
+                <BottomContainer>
+                    <ProductsContainer>
+                        {
+                            products.map(product => (
+                                
+                                    <ProductContainer key={product.title}>
+                                        <ProductInfoContainer>
+                                            <ProductImgContainer><img src={product.img} alt={product.title} /></ProductImgContainer>
+                                            <p>{product.title}</p>
+                                        </ProductInfoContainer>
+                                        <ProductPriceContainer>
+                                            <QuantityContainer>
+                                                <p>Quantity</p>
+                                                <p>{product.quantity}</p>
+                                            </QuantityContainer>
+                                            <PriceContainer>
+                                                <p>Subtotal</p>
+                                                <p>{product.quantity * product.price}</p>
+                                            </PriceContainer>
+                                        </ProductPriceContainer>
+                                    </ProductContainer>
+                                
+                            ))
+                        }
+                    </ProductsContainer>
            
-        </Container>
+                    <DetailContainer>
+                        <OrderInfoContainer>
+                            <table>
+                                <tr>
+                                    <td>Products</td>
+                                    <td>${total}</td>
+                                </tr>
+                                <tr>
+                                    <td>Shipping</td>
+                                    <td>$0</td>
+                                </tr>
+                                <tr>
+                                    <td>Total</td>
+                                    <td>${total}</td>
+                                </tr>
+                            </table>
+                        </OrderInfoContainer>
+                        <form method="post" action="https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu/">
+                            <input name="merchantId"         type="hidden"  value="508029" /> {/* esta info viende de la cuenta de PayU cuando te registras */}
+                            <input name="accountId"          type="hidden"  value="512321" /> {/* esta info viende de la cuenta de PayU cuando te registras */}
+                            <input name="description"        type="hidden"  value="baq1rosolano"  />
+                            <input name="referenceCode"      type="hidden"  value={secretCode} />
+                            <input name="amount"             type="hidden"  value={total}   />
+                            <input name="tax"                type="hidden"  value="0"  />
+                            <input name="taxReturnBase"      type="hidden"  value="0" />
+                            <input name="currency"           type="hidden"  value="COP" />
+                            <input name="signature"          type="hidden"  value={signature} /> {/* hay que encriptar y concatenar con MD5 */}
+                            <input name="test"               type="hidden"  value="0" />
+                            <input name="buyerEmail"         type="hidden"  value="rjsolanoe@gmail.com" /> {/* este email viene de la pagina */}
+                            <input name="responseUrl"        type="hidden"  value="http://localhost:3000/payu" />
+                            <input name="confirmationUrl"    type="hidden"  value="https://bybuenolaurae.herokuapp.com/payufinish" />
+                            <input name="shippingAddress"    type="hidden"  value={address}   />
+                            <input name="shippingCity"       type="hidden"  value={municipio} />
+                            <input name="shippingCountry"    type="hidden"  value="CO"  />{/* user gives this info */}
+                            <Input name="Submit"             type="submit"  value="Pagar" />
+                        </form>
+                    </DetailContainer>
+           
+                </BottomContainer>
+           
+               
+            </Container>
+            <Footer />
+       </>
     )
 }
 

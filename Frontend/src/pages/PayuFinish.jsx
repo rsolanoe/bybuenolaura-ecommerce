@@ -1,6 +1,8 @@
 import React, {useEffect} from "react";
 import styled from "styled-components";
 import axios from "axios";
+import Newsletter from "../components/Newsletter";
+import Footer from "../components/Footer";
 
 const PayuFinish = () => {
     window.scrollTo(0, 0);
@@ -24,6 +26,8 @@ const PayuFinish = () => {
             <Container>
                 <h1>PayU FINISH TEST</h1>
             </Container>
+            <Newsletter />
+            <Footer />
         </>
     );
 };

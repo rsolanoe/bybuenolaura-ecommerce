@@ -2,12 +2,13 @@ import React from "react";
 import styled from "styled-components";
 import { mobile } from "../../responsive";
 
-const OrderShipping = ({address, city, departamento, orderPrice}) => {
+const OrderShipping = ({fName, lName, phoneNumber, address, city, departamento, orderPrice}) => {
     return (
         <ShippingContainer>
             <ShippingAddress>
                 <p className="shippingAddres">Dirección de envío:</p>
-                <p>Solano E Rodolfo</p>
+                <p>{fName} {lName}</p>
+                <p>Tel: {phoneNumber}</p>
                 <p>{address}</p>
                 <p>{city} - {departamento}</p>
             </ShippingAddress>

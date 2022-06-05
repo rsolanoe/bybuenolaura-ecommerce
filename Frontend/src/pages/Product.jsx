@@ -1,5 +1,6 @@
 
 import ProductInfo from "../components/ProductInfo";
+import Footer from "../components/Footer";
 
 
 const Product = () => {
@@ -7,6 +8,7 @@ const Product = () => {
    return (
          <>
             <ProductInfo />
+            <Footer />
          </>
    );
 };

@@ -3,22 +3,27 @@ import { useSelector } from "react-redux";
 import { getProductfailure, getProductStart, getProductSuccess } from "./productSlice";
 import { registerfailure, registerStart } from "./registerSlicer";
 import { productDetailfailure, productDetailStart, productDetailSuccess } from "./singleProductSlice";
-import { userDetailsStart, userDetailsSuccess } from "./userDetailsSlice";
+import { userDetailsfailure, userDetailsStart, userOrder } from "./userDetailsSlice";
 import { loginfailure, loginStart, loginSuccess } from "./userSlice";
+
+import Swal from "sweetalert2";
+
 
 
 const BASE_URL = process.env.REACT_APP_API_URL
-console.log(BASE_URL)
 
 //USER LOGIN
 export const login = async (dispatch, user) => {
     dispatch(loginStart());
     try {
         const {data} = await axios.post(`${BASE_URL}auth/login`, user);
-        console.log(data)
         dispatch(loginSuccess(data));
     } catch (error) {
-        console.log(error)
+        Swal.fire({
+            icon: 'error',
+            // title: 'Oops...',
+            text: `${error.response.data}`,
+        })
         dispatch(loginfailure());
     }
 };
@@ -29,17 +34,20 @@ export const register = async (dispatch, user) => {
     dispatch(registerStart());///TOCA HACER ESTE SLICE
     try {
         const {data} = await axios.post(`${BASE_URL}auth/register`, user);
-        console.log(data)
         dispatch(loginSuccess(data));
     } catch (error) {
-        console.log(error)
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: `${error.response.data}`,
+        })
         dispatch(registerfailure()); ///TOCA HACER ESTE SLICE
     }
 };
 
 
 // ADD ORDER
-export const addOrder = async (orderInfo, token) => {
+export const addOrder = async (orderInfo, token, dispatch) => {
 
     const options = {
         headers: {
@@ -47,23 +55,24 @@ export const addOrder = async (orderInfo, token) => {
         }
     }
 
+    dispatch(userDetailsStart())
     try {
         const { data } = await axios.post(`${BASE_URL}orders`, orderInfo, options)
+        dispatch(userOrder(orderInfo))
         console.log(data)
     } catch (error) {
+        dispatch(userDetailsfailure());
         console.log(error)
     }
 
 }
 
 // GET ALL PRODUCTS
-export const getProducts = async (dispatch, category) => {
+export const getProducts = async (dispatch, category = null) => {
     dispatch(getProductStart());
     try {
         if (category) {
-            // const { data } = await axios.get(`http://localhost:5000/api/products?category=${category}&merchanId=508029&transactionState=4&referenceCode=PAGOTESTBYBUENOLAURAtest2&TX_VALUE=75000.00&currency=COP`);
             const { data } = await axios.get(`${BASE_URL}products?category=${category}`);
-            console.log(data)
             dispatch(getProductSuccess(data))
         } else {
             const { data } = await axios.get(`${BASE_URL}products`)

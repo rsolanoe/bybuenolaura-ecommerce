@@ -3,7 +3,9 @@ const { Schema } = mongoose;
 
 const UserSchema = new Schema(
     {
-        username: { type: String, required: true },
+        fName: { type: String, required: true },
+        lName: { type: String, required: true },
+        cedula: { type: Number, required: true },
         email: { type: String, required: true, unique: true },
         password: { type: String, required: true },
         isAdmin: { type: Boolean, default: false },
