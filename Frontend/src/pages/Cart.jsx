@@ -69,7 +69,9 @@ const Cart = () => {
                                 {cart.products.map((product) => (
                                     <Product key={product._id}>
                                         <ProductDetail>
-                                            <img src={product.img} />
+                                            <Test>
+                                                <img src={product.img} />
+                                            </Test>
                                             <Details>
                                                 <ProductDetails>
                                                     <ProductName>
@@ -145,7 +147,7 @@ const ProductDetails = styled.div`
     display: flex;
     flex-direction: column;
 
-    ${mobile({ fontSize: "14px" })}
+    ${mobile({ fontSize: "13px" })}
 `
 
 const Container = styled.div``;
@@ -220,15 +222,31 @@ const ProductDetail = styled.div`
 
     ${mobile({ width: '100%' })}
 
-    img {
+    /* img {
         width: 140px;
         height: 118px;
         object-fit: cover;
         border-radius: 5px;
 
         ${mobile({ objectFit: 'contain', width: '100px', height: '100px' })}
-    }
+    } */
 `;
+
+const Test = styled.div`
+    
+
+    ${mobile({ width: '100px', height: '100px' })}
+
+    img {
+        width: 140px;
+        height: 118px;
+        object-fit: cover;
+        border-radius: 5px;
+
+        ${mobile({ objectFit: 'cover', width: '100%', height: '100%' })}
+    }
+
+`
 
 const ProductAmountContainer = styled.div`
     display: flex;
@@ -266,7 +284,7 @@ const Details = styled.div`
     flex-direction: column;
     justify-content: space-between;
 
-    ${mobile({ padding: "10px 0", width:'100%' })}
+    ${mobile({ padding: '0', paddingLeft: "10px",  width: 'calc(100% - 100px)' })}
 
     svg {
         /* height: 20px; */

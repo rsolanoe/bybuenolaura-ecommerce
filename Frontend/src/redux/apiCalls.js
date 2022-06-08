@@ -94,21 +94,3 @@ export const productDetails = async (dispatch, id) => {
         dispatch(productDetailfailure())
     }
 }
-
-
-// USER DETAILS
-// export const getUserDetails = async (dispatch) => {
-//     dispatch(userDetailsStart());///TOCA HACER ESTE SLICE
-//     const {accessToken} = useSelector(state => state.persistedReducer.user.currentuser)
-//     const config = {
-//         headers: {token: `Bearer ${accessToken}`}
-//     }
-//     try {
-//         const {data} = await axios.get('http://localhost:5000/api/auth/profile', config);
-//         console.log(data)
-//         dispatch(userDetailsSuccess(data));
-//     } catch (error) {
-//         console.log(error)
-//         dispatch(registerfailure()); ///TOCA HACER ESTE SLICE
-//     }
-// };

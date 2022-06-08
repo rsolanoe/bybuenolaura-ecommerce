@@ -1,8 +1,18 @@
 import React from "react";
 import styled from "styled-components";
 import { NotificationsNone, Language, Settings } from "@mui/icons-material";
+import LogoutIcon from '@mui/icons-material/Logout';
+import { useDispatch } from "react-redux";
+import { Logout } from "../../redux/apiCalls";
+
 
 const TopBar = () => {
+
+    const dispatch = useDispatch();
+    const handleLogout = () => {
+        Logout(dispatch)
+    }
+
     return (
         <NavBar>
             <TopBarWrapper>
@@ -22,6 +32,9 @@ const TopBar = () => {
                     </TopRightIconContainer>
                     <TopRightIconContainer>
                         <Settings />
+                    </TopRightIconContainer>
+                    <TopRightIconContainer onClick={handleLogout}>
+                        <LogoutIcon />
                     </TopRightIconContainer>
                 </TopRight>
             </TopBarWrapper>

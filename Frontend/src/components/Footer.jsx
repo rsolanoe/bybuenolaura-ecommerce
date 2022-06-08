@@ -53,7 +53,7 @@ const Footer = () => {
             </List>
          </Center>
          <Right>
-            <Title>Contact</Title>
+            <Title>Contacto</Title>
             <ContactItem>
                <FaMapMarkerAlt /> 9700 NW 112h Ave, Miami, FL 33178
             </ContactItem>

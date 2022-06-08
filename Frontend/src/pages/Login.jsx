@@ -21,7 +21,7 @@ const Login = () => {
     const handleLogin = (e) => {
         e.preventDefault();
         login(dispatch, { email, password });
-        // navigate(-1)
+        navigate(-1)
     };
 
     const handleActiveInput = ({ target }) => {

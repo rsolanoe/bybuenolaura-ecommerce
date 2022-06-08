@@ -19,10 +19,10 @@ const ListItem = styled.li`
     transition: all 0.2s ease;
     gap: 7px;
 
-   /*  &:hover {
+    &:hover {
         background-color: #97C4B8;
         font-weight: 600;
-    } */
+    }
 
     svg {
         font-size: 18px;

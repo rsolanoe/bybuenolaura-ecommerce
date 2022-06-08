@@ -17,6 +17,7 @@ import Carrousel from "../pages/Carrousel";
 import Profile from "../pages/Profile";
 import Productos from "../pages/Productos";
 
+
 const AppRouter = () => {
 
     const {currentUser} = useSelector(state => state.persistedReducer.user);
