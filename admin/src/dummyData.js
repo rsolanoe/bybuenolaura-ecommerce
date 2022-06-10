@@ -1,51 +1,51 @@
 export const userData = [
     {
         name: "Jan",
-        "Active User": 4000,
+        "Ventas mensuales": 4000,
     },
     {
         name: "Feb",
-        "Active User": 3000,
+        "Ventas mensuales": 3000,
     },
     {
         name: "Mar",
-        "Active User": 2000,
+        "Ventas mensuales": 2000,
     },
     {
         name: "Apr",
-        "Active User": 2780,
+        "Ventas mensuales": 2780,
     },
     {
         name: "May",
-        "Active User": 1890,
+        "Ventas mensuales": 1890,
     },
     {
         name: "Jun",
-        "Active User": 2390,
+        "Ventas mensuales": 2390,
     },
     {
         name: "Jul",
-        "Active User": 3490,
+        "Ventas mensuales": 3490,
     },
     {
         name: "Aug",
-        "Active User": 4589,
+        "Ventas mensuales": 4589,
     },
     {
         name: "Sep",
-        "Active User": 1523,
+        "Ventas mensuales": 1523,
     },
     {
         name: "Oct",
-        "Active User": 6201,
+        "Ventas mensuales": 6201,
     },
     {
         name: "Nov",
-        "Active User": 4180,
+        "Ventas mensuales": 4180,
     },
     {
         name: "Dec",
-        "Active User": 3625,
+        "Ventas mensuales": 3625,
     },
 ];
 
@@ -218,15 +218,31 @@ export const productRows = [
 export const productData = [
     {
         name: "Jan",
-        "Sales": 3541,
+        Sales: 3541,
     },
     {
         name: "Feb",
-        "Sales": 4158,
+        Sales: 4158,
     },
     {
         name: "Mar",
-        "Sales": 2991,
+        Sales: 2991,
     },
-
 ];
+
+export const options = {
+    months: [
+        "Enero",
+        "Febrero",
+        "Marzo",
+        "Abril",
+        "Mayo",
+        "Junio",
+        "Julio",
+        "Agosto",
+        "Septiembre",
+        "Octubre",
+        "Noviembre",
+        "Diciembre",
+    ],
+};

@@ -7,7 +7,6 @@ import {
     PersonOutlineOutlined,
     StorefrontOutlined,
     AttachMoneyOutlined,
-    AssessmentOutlined,
     EmailOutlined,
     ForumOutlined,
     ChatBubbleOutlineOutlined,
@@ -16,6 +15,8 @@ import {
 } from "@mui/icons-material";
 import BarList from "./BarList";
 import { NavLink } from "react-router-dom";
+import AddBusinessOutlinedIcon from '@mui/icons-material/AddBusinessOutlined';
+
 
 
 const SideBar = () => {
@@ -26,9 +27,11 @@ const SideBar = () => {
                 <SideBarMenu>
                     <SideBarTitle>Dashboard</SideBarTitle>
                     <SideBarList>
+                    <SLink to='/'>
                         <BarList  title={"Home"} icon={<LineStyle />} />
-                        <BarList  title={"Analytics"} icon={<Timeline />} />
-                        <BarList  title={"Sales"} icon={<TrendingUp />} />
+                    </SLink>
+                    <BarList  title={"Analytics"} icon={<Timeline />} />
+                    <BarList  title={"Sales"} icon={<TrendingUp />} />
                     </SideBarList>
                 </SideBarMenu>
 
@@ -36,13 +39,13 @@ const SideBar = () => {
                     <SideBarTitle>Quick Menu</SideBarTitle>
                     <SideBarList>
                         <SLink to='/user'>
-                            <BarList title={"Users"} icon={<PersonOutlineOutlined />} />
+                            <BarList title={"Usuarios"} icon={<PersonOutlineOutlined />} />
                         </SLink>
                         <SLink to='/product'>
-                           <BarList title={"Products"} icon={<StorefrontOutlined />} />
+                           <BarList title={"Productos"} icon={<StorefrontOutlined />} />
                         </SLink>
-                        <BarList title={"Transactions"} icon={<AttachMoneyOutlined />} />
-                        <BarList title={"Reports"} icon={<AssessmentOutlined />} />
+                        <BarList title={"Agregar Productos"} icon={<AddBusinessOutlinedIcon />} />
+                        <BarList title={"Transacciones"} icon={<AttachMoneyOutlined />} />
                     </SideBarList>
                 </SideBarMenu>
 

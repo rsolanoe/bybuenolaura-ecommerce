@@ -20,7 +20,6 @@ const Carrusel = () => {
             onSlideChange={() => console.log('slide change')}
             onSwiper={(swiper) => console.log(swiper)}
          >
-            <SwiperSlide><img src='https://img.freepik.com/foto-gratis/alegre-mujer-cuarenta-anos-elegante-vestido-sombrero-panuelo-cuello-indica-distancia-espacio-copia-anuncia-que-algo-muestra-camino-al-centro-comercial-aislado-sobre-pared-marron_273609-53396.jpg?t=st=1650385943~exp=1650386543~hmac=fff5bf8161754d30f1253a8938e4ac0579295e739aa045cbf9f58d9407f19c7b&w=826'/></SwiperSlide>
             <SwiperSlide><p>Slide 2</p></SwiperSlide>
             <SwiperSlide><p>Slide 3</p></SwiperSlide>
             <SwiperSlide><p>Slide 4</p></SwiperSlide>
@@ -32,19 +31,15 @@ const Carrusel = () => {
 
 
 const Carro = styled(Swiper)`
-   height: 100vh;
-   width: 100%;
+   margin: 2rem auto;
+   height: 70vh;
+   width: 100vw;
    background-color: lightblue;
    
    .swiper-slide{
       display: flex;
       align-items: center;
       justify-content: center;
-   }
-
-   img{
-      width: 100%;
-      height: 100%;
    }
 
    

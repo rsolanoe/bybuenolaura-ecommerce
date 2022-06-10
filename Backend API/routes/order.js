@@ -68,29 +68,46 @@ router.get("/", verifyTokenAndAdmin, async (req, res) => {
 
 //GET MONTHLY INCOME
 router.get("/stats", verifyTokenAndAdmin, async (req, res) => {
+    const qRatio = req.query.ratio
     const date = new Date();
     const lastMonth = new Date(date.setMonth(date.getMonth() - 1));
     const previousMonth = new Date(
         new Date().setMonth(lastMonth.getMonth() - 1)
     );
-
     try {
+        if(qRatio){
+            const income = await Order.aggregate([
+                { $match: { createdAt: { $gte: previousMonth } } },
+                {
+                    $project: {
+                        month: { $month: "$createdAt" },
+                        sales: "$totalPrice",
+                    },
+                },
+                {
+                    $group: {
+                        _id: "$month",
+                        total: { $sum: "$sales"},
+                    },
+                },
+            ]).sort( { '_id': 1} );
+            return res.status(200).json(income);
+        }
         const income = await Order.aggregate([
-            { $match: { createdAt: { $gte: previousMonth } } },
             {
                 $project: {
                     month: { $month: "$createdAt" },
-                    sales: "$amount",
+                    sales: "$totalPrice",
                 },
             },
             {
                 $group: {
                     _id: "$month",
-                    total: { $sum: "$sales" },
+                    total: { $sum: "$sales"},
                 },
             },
-        ]);
-        res.status(200).json(income);
+        ]).sort( { '_id': 1} );
+        return res.status(200).json(income);
     } catch (error) {
         res.status(500).json({ error });
     }

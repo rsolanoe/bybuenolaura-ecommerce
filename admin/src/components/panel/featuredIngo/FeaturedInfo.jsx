@@ -1,21 +1,50 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import {ArrowDownward, ArrowUpward} from "@mui/icons-material";
+import axios from 'axios'
+import { useSelector } from 'react-redux'
 
 
 
 const FeaturedInfo = () => {
+
+    const [ income , setIncome ] = useState([])
+    const [ perc , setPerc ] = useState(0)
+    console.log(perc);
+    const { accessToken } = useSelector(state => state.persistedReducer.user.currentUser);
+
+    useEffect(() => {
+       
+        const getIncome = async () => {
+            try {
+                const { data } = await axios.get('http://localhost:5000/api/orders/stats?ratio=true', {
+                    headers: {
+                        token: `Bearer ${accessToken}`
+                    }
+                })
+                setIncome(data)
+                setPerc(data[1].total*100 / data[0].total - 100)
+            } catch (error) {
+                console.log(error);
+            }
+        }
+
+        getIncome()
+
+    }, [])
+    
+
     return (
         <Featured>
             <FeaturedItem>
-                <FeaturedTitle>Revenue</FeaturedTitle>
+                <FeaturedTitle>Ingresos</FeaturedTitle>
                 <FeaturedMoneyContainer>
-                    <FeaturedMoney>$2,415</FeaturedMoney>
+                    <FeaturedMoney>${income[1]?.total.toLocaleString('usd')}</FeaturedMoney>
                     <FeaturedMoneyRate>
-                        -11.4 <ArrowDown/> 
+                        {perc?.toFixed(2)} { perc > 0 ? <ArrowUp/> : <ArrowDown/> }
                     </FeaturedMoneyRate>
                 </FeaturedMoneyContainer>
-                <FeaturedSub>Compared to last month</FeaturedSub>
+                <FeaturedSub>En comparación con el mes pasado</FeaturedSub>
             </FeaturedItem>
 
             <FeaturedItem>

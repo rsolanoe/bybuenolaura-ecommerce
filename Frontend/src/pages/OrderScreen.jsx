@@ -108,7 +108,7 @@ const OrderScreen = () => {
                             <input name="signature"          type="hidden"  value={signature} /> {/* hay que encriptar y concatenar con MD5 */}
                             <input name="test"               type="hidden"  value="0" />
                             <input name="buyerEmail"         type="hidden"  value="rjsolanoe@gmail.com" /> {/* este email viene de la pagina */}
-                            <input name="responseUrl"        type="hidden"  value="http://localhost:3000/payu" />
+                            <input name="responseUrl"        type="hidden"  value="https://bybuenolaurae.herokuapp.com/payu" />
                             <input name="confirmationUrl"    type="hidden"  value="https://bybuenolaurae.herokuapp.com/payufinish" />
                             <input name="shippingAddress"    type="hidden"  value={address}   />
                             <input name="shippingCity"       type="hidden"  value={municipio} />

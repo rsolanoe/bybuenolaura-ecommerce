@@ -22,6 +22,9 @@ const Slider = () => {
          <Arrow direction="left" onClick={() => handleClick("left")}>
             <MdOutlineKeyboardArrowLeft /> {/* Arrow pointing to the left */}
          </Arrow>
+         <Arrow direction="right" onClick={() => handleClick("right")}>
+            <MdOutlineKeyboardArrowRight /> {/* Arrow pointing to the right */}
+         </Arrow>
          <Wrapper slideIndex={slideIndex}>
             {sliderItems.map((item, i) => (
                <Slide bg={item.bg} key={item.id} >
@@ -38,9 +41,7 @@ const Slider = () => {
                </Slide>
             ))}
          </Wrapper>
-         <Arrow direction="right" onClick={() => handleClick("right")}>
-            <MdOutlineKeyboardArrowRight /> {/* Arrow pointing to the right */}
-         </Arrow>
+         
       </Container>
    );
 };
@@ -52,22 +53,26 @@ const Slide = styled.div`
   align-items: center;
   position: relative;
   background-color: #${({ bg }) => bg};
+
+  ${mobile({ flexDirection: 'column', height: '100%'})}
 `;
 
 const ImgContainer = styled.div`
-  height: 100%;
+  height: 80%;
   flex: 1;
   position: relative;
   
 
   img {
     width: 100%;
-    height: 70%;
+    height: 100%;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    //transform: translateY(30%);
+    object-fit: cover;
+
+    ${mobile({ width: 'auto' })}
   }
 `;
 
@@ -75,10 +80,14 @@ const InfoContainer = styled.div`
   flex: 1;
   box-sizing: border-box;
   padding: 50px;
+
+  ${mobile({ padding: '25px' })}
 `;
 
 const Title = styled.h1`
   font-size: 70px;
+
+  ${mobile({ fontSize: '28px' })}
 `;
 
 const Desc = styled.p`
@@ -86,6 +95,8 @@ const Desc = styled.p`
   font-size: 20px;
   font-weight: 500;
   letter-spacing: 3px;
+
+  ${mobile({ fontSize: '15px', margin: '10px 0' })}
 `;
 
 const Button = styled.button`
@@ -97,6 +108,8 @@ const Button = styled.button`
   &:hover{
      background-color: red;
   }
+
+  ${mobile({ fontSize: '13px' })}
 `;
 
 const Wrapper = styled.div`
@@ -105,6 +118,7 @@ const Wrapper = styled.div`
   display: flex;
   transform: translateX( ${({slideIndex}) => slideIndex * -100}vw);
   transition: all 1s ease;
+
 `;
 
 const Container = styled.section`
@@ -114,7 +128,7 @@ const Container = styled.section`
   display: flex;
   overflow: hidden;
 
-  ${mobile({display: 'none'})}
+  ${mobile({height: '73vh'})}
 
 `;
 
@@ -130,7 +144,7 @@ const Arrow = styled.div`
   top: 0;
   bottom: 0;
   margin: auto;
-  z-index: ${({ direction }) => direction === "left" && 50};
+  z-index: ${({ direction }) => direction === "left" ? 50 : 50};
   left: ${({ direction }) => direction === "left" && "10px"};
   right: ${({ direction }) => direction === "right" && "10px"};
   cursor: pointer;
