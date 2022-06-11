@@ -11,6 +11,7 @@ import {
 
 import Swal from "sweetalert2";
 import "sweetalert2/src/sweetalert2.scss";
+import { getOrdersfailure, getOrdersStart, getOrdersSuccess } from "./orderSlice";
 
 
 //USER LOGIN
@@ -93,4 +94,17 @@ export const deleteProduct = async (id, dispatch, token) => {
     }
 };
 
-// GET PRODUCTS STATS
+// GET ORDERS
+export const getOrders = async (dispatch, token) => {
+    dispatch(getOrdersStart());
+    try {
+        const { data } = await axios.get(`http://localhost:5000/api/orders`, {
+            headers: {
+                token: `Beared ${token}`
+            }
+        });
+        dispatch(getOrdersSuccess(data));
+    } catch (error) {
+        dispatch(getOrdersfailure());
+    }
+};

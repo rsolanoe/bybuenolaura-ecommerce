@@ -60,7 +60,7 @@ export const userRows = [
     },
     {
         id: 2,
-        username: "Jon Snow",
+        username: "Rodolfo Solano",
         avatar: "https://blog.gosocket.net/wp-content/uploads/2016/03/Steve-Jobs.png",
         email: "jon@gmail.com",
         status: "active",

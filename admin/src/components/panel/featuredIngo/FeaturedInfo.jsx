@@ -41,7 +41,7 @@ const FeaturedInfo = () => {
                 <FeaturedMoneyContainer>
                     <FeaturedMoney>${income[1]?.total?.toLocaleString('usd')}</FeaturedMoney>
                     <FeaturedMoneyRate>
-                        {perc?.toFixed(2)} { perc > 0 ? <ArrowUp/> : <ArrowDown/> }
+                        {perc?.toFixed(2)}% { perc > 0 ? <ArrowUp/> : <ArrowDown/> }
                     </FeaturedMoneyRate>
                 </FeaturedMoneyContainer>
                 <FeaturedSub>En comparación con el mes pasado</FeaturedSub>

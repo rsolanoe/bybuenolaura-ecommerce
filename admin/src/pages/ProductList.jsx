@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import styled from 'styled-components'
-import { DataGrid } from '@mui/x-data-grid';
+import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
@@ -58,8 +58,14 @@ const ProductList = () => {
                 getRowId={ row => row._id }
                 pageSize={10}
                 rowsPerPageOptions={[5]}
-                checkboxSelection
+                // checkboxSelection
                 disableSelectionOnClick
+                csvOptions={{
+                    fileName: 'customerDataBase',
+                    delimiter: ';',
+                    utf8WithBom: true,
+                  }}
+                components={{ Toolbar: GridToolbar }}
 
             />
         </Container>

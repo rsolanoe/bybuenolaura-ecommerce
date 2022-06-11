@@ -7,8 +7,10 @@ import Panel from "../components/panel/Panel";
 import UserList from "./UserList";
 import UserPage from "./UserPage";
 import NewUser from "./NewUser";
+import NewProduct from "./NewProduct";
 import ProductList from "./ProductList";
 import ProductPage from "./ProductPage";
+import OrderList from "./OrderList";
 
 const HomeScreen = () => {
     return (
@@ -21,7 +23,8 @@ const HomeScreen = () => {
                 <Route path='newUser' element={<NewUser />} />
                 <Route path='product' element={<ProductList />} />
                 <Route path='product/:id' element={<ProductPage />} />
-                <Route path='newProduct' element={<ProductList />} />
+                <Route path='newProduct' element={<NewProduct />} />
+                <Route path='orders' element={<OrderList />} />
             </Routes>
         </Main>
     );

@@ -22,52 +22,58 @@ import AddBusinessOutlinedIcon from '@mui/icons-material/AddBusinessOutlined';
 const SideBar = () => {
 
     return (
-        <Aside>
-            <SideBarWrapper>
-                <SideBarMenu>
-                    <SideBarTitle>Dashboard</SideBarTitle>
-                    <SideBarList>
-                    <SLink to='/'>
-                        <BarList  title={"Home"} icon={<LineStyle />} />
-                    </SLink>
-                    <BarList  title={"Analytics"} icon={<Timeline />} />
-                    <BarList  title={"Sales"} icon={<TrendingUp />} />
-                    </SideBarList>
-                </SideBarMenu>
-
-                <SideBarMenu>
-                    <SideBarTitle>Quick Menu</SideBarTitle>
-                    <SideBarList>
-                        <SLink to='/user'>
-                            <BarList title={"Usuarios"} icon={<PersonOutlineOutlined />} />
+        <>
+            <Aside>
+                <SideBarWrapper>
+                    <SideBarMenu>
+                        <SideBarTitle>Dashboard</SideBarTitle>
+                        <SideBarList>
+                        <SLink to='/'>
+                            <BarList  title={"Home"} icon={<LineStyle />} />
                         </SLink>
-                        <SLink to='/product'>
-                           <BarList title={"Productos"} icon={<StorefrontOutlined />} />
-                        </SLink>
-                        <BarList title={"Agregar Productos"} icon={<AddBusinessOutlinedIcon />} />
-                        <BarList title={"Transacciones"} icon={<AttachMoneyOutlined />} />
-                    </SideBarList>
-                </SideBarMenu>
-
-                <SideBarMenu>
-                    <SideBarTitle>Notifications</SideBarTitle>
-                    <SideBarList>
-                        <BarList title={"Mail"} icon={<EmailOutlined />} />
-                        <BarList title={"Feedback"} icon={<ForumOutlined />} />
-                        <BarList title={"Messages"} icon={<ChatBubbleOutlineOutlined />} />
-                    </SideBarList>
-                </SideBarMenu>
-
-                <SideBarMenu>
-                    <SideBarTitle>Staff</SideBarTitle>
-                    <SideBarList>
-                        <BarList title={"Manage"} icon={<WorkOutlineOutlined />} />
-                        <BarList title={"Analytics"} icon={<Timeline />} />
-                        <BarList title={"Reports"} icon={<Report />} />
-                    </SideBarList>
-                </SideBarMenu>
-            </SideBarWrapper>
-        </Aside>
+                        <BarList  title={"Analytics"} icon={<Timeline />} />
+                        <BarList  title={"Sales"} icon={<TrendingUp />} />
+                        </SideBarList>
+                    </SideBarMenu>
+            
+                    <SideBarMenu>
+                        <SideBarTitle>Quick Menu</SideBarTitle>
+                        <SideBarList>
+                            <SLink to='/user'>
+                                <BarList title={"Usuarios"} icon={<PersonOutlineOutlined />} />
+                            </SLink>
+                            <SLink to='/product'>
+                               <BarList title={"Productos"} icon={<StorefrontOutlined />} />
+                            </SLink>
+                            <SLink to='/newproduct'>
+                                <BarList title={"Agregar Productos"} icon={<AddBusinessOutlinedIcon />} />
+                            </SLink>
+                            <SLink to='/orders'>
+                                <BarList title={"Transacciones"} icon={<AttachMoneyOutlined />} />
+                            </SLink>
+                        </SideBarList>
+                    </SideBarMenu>
+            
+                    <SideBarMenu>
+                        <SideBarTitle>Notifications</SideBarTitle>
+                        <SideBarList>
+                            <BarList title={"Mail"} icon={<EmailOutlined />} />
+                            <BarList title={"Feedback"} icon={<ForumOutlined />} />
+                            <BarList title={"Messages"} icon={<ChatBubbleOutlineOutlined />} />
+                        </SideBarList>
+                    </SideBarMenu>
+            
+                    <SideBarMenu>
+                        <SideBarTitle>Staff</SideBarTitle>
+                        <SideBarList>
+                            <BarList title={"Manage"} icon={<WorkOutlineOutlined />} />
+                            <BarList title={"Analytics"} icon={<Timeline />} />
+                            <BarList title={"Reports"} icon={<Report />} />
+                        </SideBarList>
+                    </SideBarMenu>
+                </SideBarWrapper>
+            </Aside>
+        </>
     );
 };
 

@@ -1,32 +1,66 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Link, useParams } from 'react-router-dom'
 import Chart from '../components/panel/chart/Chart'
 import { productData } from "../dummyData";
 import { useSelector } from 'react-redux'
 import PublishIcon from '@mui/icons-material/Publish';
+import { options } from '../dummyData'
+import axios from 'axios'
 
 const ProductPage = () => {
 
     const {id} = useParams()
+    const { accessToken } = useSelector( state => state.persistedReducer.user.currentUser);
     const { products } = useSelector( state => state.persistedReducer.products);
-    const selectedProduct = products.find( product => product._id === id )
 
     const [pStats, setPStats] = useState([])
+    console.log(pStats)
+
+    const selectedProduct = products.find( product => product._id === id )
+
+
+    useEffect(() => {
+    
+        const getData = async () => {
+
+            const { data } = await axios.get(`http://localhost:5000/api/orders/stats?pid=${id}`, {
+                headers: {
+                    token: `Beared ${accessToken}`
+                }
+            })
+            console.log(data);
+            data.map( item => {
+                setPStats( prev => [
+                    ...prev,
+                    {
+                        mes: options.months[item._id - 1],
+                        "Monto": item.sales
+                    }
+                ])
+            })
+
+        }
+
+        getData()
+
+    }, [])
+    
+
+
 
 
     return (
         <Container>
             <ProductTitleContainer>
                 <h1>Product</h1>
-                <Link to='/newproduct'>
-                    <button>Create</button>
-                </Link>
             </ProductTitleContainer>
 
             <ProductTop>
                 <ProductTopLeft>
-                    <Chart data={productData} dataKey='Sales' title='Sales Performance' />
+                    {
+                        pStats.length > 0 && <Chart data={pStats} dataKey='Monto' title='Sales Performance' />
+                    }
                 </ProductTopLeft>
                 <ProductTopRight>
                     <ProductInfoTop>
@@ -213,17 +247,5 @@ const ProductTitleContainer = styled.div`
     align-items: center;
     justify-content: space-between;
     /* margin: 0 20px; */
-
-    button {
-        width: 80px;
-        border: none;
-        padding: 5px;
-        background-color: teal;
-        color: white;
-        border-radius: 5px;
-        font-size: 16px;
-        cursor: pointer;
-
-    }
 `
 export default ProductPage;
