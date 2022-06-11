@@ -11,8 +11,10 @@ import { deleteProduct, getProducts } from "../redux/apiCalls";
 const ProductList = () => {
 
     const dispatch = useDispatch();
-    const {products} = useSelector( state => state.products);
+    const {products} = useSelector( state => state.persistedReducer.products);
     const { accessToken } = useSelector( state => state.persistedReducer.user.currentUser)
+
+    console.log(products)
 
     useEffect(() => {
         getProducts(dispatch)
@@ -58,6 +60,7 @@ const ProductList = () => {
                 rowsPerPageOptions={[5]}
                 checkboxSelection
                 disableSelectionOnClick
+
             />
         </Container>
     )

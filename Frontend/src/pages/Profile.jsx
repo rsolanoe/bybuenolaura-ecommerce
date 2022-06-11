@@ -159,7 +159,7 @@ const OrderContainer = styled.div`
 
 const OrderBody = styled.div`
     padding: ${({variant}) => variant == 'okey' ? '1rem' : '0'};
-    max-height: ${({variant}) => variant == 'okey' ? '1000px' : '0'};
+    max-height: ${({variant}) => variant == 'okey' ? 'auto' : '0'};
     overflow: ${({variant}) => variant == 'okey' ? 'visible' : 'hidden'};
     transition: all 0.3s ease;
 `

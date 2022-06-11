@@ -46,7 +46,7 @@ const Panel = () => {
         <Container>
             <FeaturedInfo />
             {
-                sales.length > 0 && <Chart data={sales} title='Análisis de ventas' grid dataKey={"Monto"}/>
+                sales.length > 0 && <div style={{margin: '20px'}}><Chart data={sales} title='Análisis de ventas' grid dataKey={"Monto"}/></div>
             }
             <HomeWidget />
         </Container>

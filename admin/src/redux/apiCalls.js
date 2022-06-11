@@ -40,7 +40,7 @@ export const login = async (dispatch, user) => {
     }
 };
 
-//USER LOGIN
+//USER LOGOUT
 export const Logout = (dispatch) => {
     dispatch(logout());
 };
@@ -60,13 +60,6 @@ export const getProducts = async (dispatch) => {
 export const deleteProduct = async (id, dispatch, token) => {
     dispatch(deleteProductStart());
     try {
-        // const { data } = await axios.delete(
-        //     `http://localhost:5000/api/products/${id}`, {
-        //         headers: {
-        //             token: `Bearer ${token}`
-        //         }
-        //     }
-        // );
         Swal.fire({
                 title: '¿Estás seguro?',
                 text: "¡No podrás revertir esto!",
@@ -99,3 +92,5 @@ export const deleteProduct = async (id, dispatch, token) => {
         dispatch(deleteProductfailure());
     }
 };
+
+// GET PRODUCTS STATS

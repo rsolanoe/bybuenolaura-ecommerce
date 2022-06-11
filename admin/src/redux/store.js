@@ -21,13 +21,13 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
     user: userReducer,
+    products: productReducer
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
     reducer: {
         persistedReducer,
-        products: productReducer
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({

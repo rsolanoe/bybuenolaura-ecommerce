@@ -1,10 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import Chart from '../components/panel/chart/Chart'
 import { productData } from "../dummyData";
+import { useSelector } from 'react-redux'
+import PublishIcon from '@mui/icons-material/Publish';
 
 const ProductPage = () => {
+
+    const {id} = useParams()
+    const { products } = useSelector( state => state.persistedReducer.products);
+    const selectedProduct = products.find( product => product._id === id )
+
+    const [pStats, setPStats] = useState([])
+
+
     return (
         <Container>
             <ProductTitleContainer>
@@ -20,32 +30,54 @@ const ProductPage = () => {
                 </ProductTopLeft>
                 <ProductTopRight>
                     <ProductInfoTop>
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyBSne0wBmcYU5QQzNG8QMGkm0pGd1AGU6ig&usqp=CAU" alt="" />
-                        <span>Apple Airpods</span>
+                        <img src={selectedProduct.img} alt="" />
+                        <span>{selectedProduct.title}</span>
                     </ProductInfoTop>
                     <ProductInfoBottom>
                         <ProductInfoIem>
                             <span>id: </span>
-                            <span>123</span>
+                            <span> {selectedProduct._id}</span>
                         </ProductInfoIem>
                         <ProductInfoIem>
                             <span>Sales: </span>
                             <span>5123</span>
                         </ProductInfoIem>
                         <ProductInfoIem>
-                            <span>Active: </span>
-                            <span>yes</span>
+                            <span></span>
                         </ProductInfoIem>
                         <ProductInfoIem>
                             <span>in stock: </span>
-                            <span>no</span>
+                            <span>{JSON.stringify(selectedProduct.inStock)}</span>
                         </ProductInfoIem>
                     </ProductInfoBottom>
                 </ProductTopRight>
             </ProductTop>
+
             <ProductBottom>
-                <form>
-                    
+                <form className="productForm">
+                    <div className="productFormLeft">
+                        <label>Product Name</label>
+                        <input type="text" placeholder={selectedProduct.title} />
+                        <label>Product Description</label>
+                        <input type="text" placeholder='Ingrese descripción del producto' />
+                        <label>Price</label>
+                        <input type="text" placeholder={selectedProduct.price} />
+                        <label>In Stock</label>
+                        <select name="inStock" id="idStock">
+                            <option value="true">Yes</option>
+                            <option value="false">No</option>
+                        </select>
+                    </div>
+                    <div className="productFormRight">
+                        <div className="productUpload">
+                            <img src={selectedProduct.img} alt="" className="productUploadImg" />
+                            <label for="file">
+                                <PublishIcon />
+                            </label>
+                            <input type="file" id="file" style={{ display: "none" }} />
+                        </div>
+                        <button className="productButton">Update</button>
+                    </div>
                 </form>
             </ProductBottom>
 
@@ -54,7 +86,7 @@ const ProductPage = () => {
 };
 
 const ProductInfoIem = styled.div`
-    width: 150px;
+    /* width: 150px; */
     display: flex;
     justify-content: space-between;
 
@@ -88,24 +120,87 @@ const ProductInfoBottom = styled.div`
 
 const ProductTop = styled.div`
     display: flex;
+    margin: 20px 0;
 `
 
 const ProductTopLeft = styled.div`
-    flex: 1;
+    /* flex: 1; */
+    width: 35%;
 `
 
 const ProductTopRight = styled.div`
-    flex: 1;
+    /* flex: 1; */
+    width: 35%;
     padding: 20px;
-    margin: 20px;
+    margin: 0 20px;
     box-shadow: 0 0 15px -10px rgba(0,0,0,0.75);
 
 `
 
 const ProductBottom = styled.div`
     padding: 20px;
-    margin: 20px;
+    margin: 35px 0;
     box-shadow: 0 0 15px -10px rgba(0,0,0,0.75);
+
+    .productForm {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .productFormLeft {
+        display: flex;
+        flex-direction: column;
+        width: 300px;
+
+        select {
+            width: 25%;
+        }
+    }
+
+    .productFormLeft > label {
+        margin-bottom: 10px;
+        color: gray;
+    }
+
+    .productFormLeft > input {
+        margin-bottom: 10px;
+        border: none;
+        padding: 5px;
+        border-bottom: 1px solid gray;
+    }
+
+    .productFormLeft >select{
+        margin-bottom: 10px;
+    }
+
+    .productUploadImg{
+        width: 150px;
+        height: 150px;
+        border-radius: 7px;
+        object-fit: cover;
+        margin-right: 20px;
+    }
+
+    .productFormRight{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+
+    .productUpload{
+        display: flex;
+        align-items: center;
+    }
+
+    .productButton{
+        border: none;
+        padding: 5px;
+        border-radius: 5px;
+        background-color: darkblue;
+        color:white;
+        font-weight: 600;
+        cursor: pointer;
+    }
 `
 
 const Container = styled.div`
@@ -117,6 +212,7 @@ const ProductTitleContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
+    /* margin: 0 20px; */
 
     button {
         width: 80px;

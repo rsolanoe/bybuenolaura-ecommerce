@@ -39,7 +39,7 @@ const FeaturedInfo = () => {
             <FeaturedItem>
                 <FeaturedTitle>Ingresos</FeaturedTitle>
                 <FeaturedMoneyContainer>
-                    <FeaturedMoney>${income[1]?.total.toLocaleString('usd')}</FeaturedMoney>
+                    <FeaturedMoney>${income[1]?.total?.toLocaleString('usd')}</FeaturedMoney>
                     <FeaturedMoneyRate>
                         {perc?.toFixed(2)} { perc > 0 ? <ArrowUp/> : <ArrowDown/> }
                     </FeaturedMoneyRate>
@@ -76,7 +76,6 @@ const Featured = styled.div`
     width: 100%;
     display: flex;
     justify-content: space-between;
-    margin-top: 20px;
 `
 
 const FeaturedItem = styled.div`
