@@ -58,22 +58,22 @@ const OrderScreen = () => {
                         {
                             products.map(product => (
                                 
-                                    <ProductContainer key={product.title}>
-                                        <ProductInfoContainer>
-                                            <ProductImgContainer><img src={product.img} alt={product.title} /></ProductImgContainer>
-                                            <p>{product.title}</p>
-                                        </ProductInfoContainer>
-                                        <ProductPriceContainer>
-                                            <QuantityContainer>
-                                                <p>Quantity</p>
-                                                <p>{product.quantity}</p>
-                                            </QuantityContainer>
-                                            <PriceContainer>
-                                                <p>Subtotal</p>
-                                                <p>{product.quantity * product.price}</p>
-                                            </PriceContainer>
-                                        </ProductPriceContainer>
-                                    </ProductContainer>
+                                <ProductContainer key={product.title}>
+                                    <ProductInfoContainer>
+                                        <ProductImgContainer><img src={product.img} alt={product.title} /></ProductImgContainer>
+                                        <p>{product.title}</p>
+                                    </ProductInfoContainer>
+                                    <ProductPriceContainer>
+                                        <QuantityContainer>
+                                            <p>Quantity</p>
+                                            <p>{product.quantity}</p>
+                                        </QuantityContainer>
+                                        <PriceContainer>
+                                            <p>Subtotal</p>
+                                            <p>{product.quantity * product.price}</p>
+                                        </PriceContainer>
+                                    </ProductPriceContainer>
+                                </ProductContainer>
                                 
                             ))
                         }

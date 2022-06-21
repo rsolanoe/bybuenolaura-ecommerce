@@ -2,6 +2,8 @@ const jwt = require("jsonwebtoken");
 
 const verifyToken = (req, res, next) => {
     const header = req.headers.token; // Esto trae un objeto, la propiedad 'token' es el nombre que se le dio en el header en postman
+    console.log(req.headers)
+    console.log(header)
     if (header) {
         const token = header.split(" ")[1];
         jwt.verify(token, process.env.JWT_SEC, (err, user) => {

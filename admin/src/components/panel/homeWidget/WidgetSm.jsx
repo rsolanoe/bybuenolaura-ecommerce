@@ -64,6 +64,7 @@ const WidgetSmContainer = styled.div`
     flex: 1;
     box-shadow: 0 0 15px -10px rgba(0, 0, 0, 0.75);
     padding: 20px;
+    align-self: flex-start;
 `;
 
 const Title = styled.span`

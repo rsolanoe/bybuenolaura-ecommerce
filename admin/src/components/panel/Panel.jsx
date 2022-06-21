@@ -14,11 +14,7 @@ const Panel = () => {
     const {currentUser} = useSelector(state => state.persistedReducer.user);
 
     const [sales, setData] = useState([])
-
-    console.log(sales);
-
     const totalSale = sales.reduce((acc, item) => acc + item.Monto, 0)
-    console.log(totalSale)
 
     useEffect(() => {
 

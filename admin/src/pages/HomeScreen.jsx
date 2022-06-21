@@ -1,7 +1,6 @@
 import React from "react";
 import styled from 'styled-components'
 import { Routes, Route } from 'react-router-dom'
-
 import SideBar from "../components/sidebar/SideBar";
 import Panel from "../components/panel/Panel";
 import UserList from "./UserList";
@@ -11,6 +10,7 @@ import NewProduct from "./NewProduct";
 import ProductList from "./ProductList";
 import ProductPage from "./ProductPage";
 import OrderList from "./OrderList";
+import OrderPage from "./OrderPage";
 
 const HomeScreen = () => {
     return (
@@ -25,6 +25,7 @@ const HomeScreen = () => {
                 <Route path='product/:id' element={<ProductPage />} />
                 <Route path='newProduct' element={<NewProduct />} />
                 <Route path='orders' element={<OrderList />} />
+                <Route path='orders/:id' element={<OrderPage />} />
             </Routes>
         </Main>
     );

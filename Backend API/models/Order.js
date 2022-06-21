@@ -21,6 +21,7 @@ const OrderSchema = new Schema(
             city: { type: String, required: true },
             departamento: { type: String, required: true },
             address: { type: String, required: true },
+            neighborhood: { type: String, required: true },
          },
         paymentMethod: {  
             type: String,

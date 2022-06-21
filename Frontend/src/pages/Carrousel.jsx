@@ -25,7 +25,7 @@ const Carrousel = () => {
 
     const {_id: userId, accessToken} = useSelector(state => state.persistedReducer.user.currentUser);
     const {products: orderItems, total: totalPrice} = useSelector(state => state.persistedReducer.cart);
-    const {municipio: city, departamento, address, name, lastName, phoneNumber} = useSelector(state => state.persistedReducer.user.customerInfo);
+    const {municipio: city, departamento, address, name, lastName, phoneNumber, neighborhood} = useSelector(state => state.persistedReducer.user.customerInfo);
 
     useEffect(() => {
         const getPayuData = async () => {
@@ -46,7 +46,8 @@ const Carrousel = () => {
         shippingAddress: {
             city,
             departamento,
-            address
+            address,
+            neighborhood
         },
         paymentMethod: orderInfo?.lapPaymentMethodType, ///VER ESTA INFO DEL HTTP.GET
         paymentResult: orderInfo?.message,///VER ESTA INFO DEL HTTP.GET

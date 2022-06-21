@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import styled from "styled-components";
 import { useSelector } from 'react-redux'
 import axios from 'axios'
+
 
 const NewProduct = () => {
 
@@ -117,6 +118,7 @@ const NewProductContainer = styled.section`
     padding: 20px;
 `;
 
-const Title = styled.h1``;
+const Title = styled.h1`
+`;
 
 export default NewProduct;
