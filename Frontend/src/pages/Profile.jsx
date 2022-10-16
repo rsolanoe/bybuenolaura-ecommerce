@@ -15,9 +15,7 @@ const BASE_URL = process.env.REACT_APP_API_URL
 
 const Profile = () => {
 
-    const { _id: userId, accessToken } = useSelector(
-        (state) => state.persistedReducer.user?.currentUser
-    );
+    const { _id: userId, accessToken } = useSelector((state) => state.persistedReducer.user?.currentUser);
 
     const initialState = {
         order: [],
@@ -27,7 +25,6 @@ const Profile = () => {
 
     const [orders, setOrders] = useState(initialState);
     const {order, isLoading, isError} = orders
-    console.log(order);
 
     const [show, setShow] = useState([0])
 

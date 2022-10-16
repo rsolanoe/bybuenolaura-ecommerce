@@ -19,12 +19,12 @@ export const login = async (dispatch, user) => {
         const {data} = await axios.post(`${BASE_URL}auth/login`, user);
         dispatch(loginSuccess(data));
     } catch (error) {
-        Swal.fire({
+        dispatch(loginfailure());
+        return Swal.fire({
             icon: 'error',
             // title: 'Oops...',
             text: `${error.response.data}`,
         })
-        dispatch(loginfailure());
     }
 };
 

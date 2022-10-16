@@ -11,18 +11,12 @@ import Footer from "../components/Footer";
 
 const Cart = () => {
     const cart = useSelector((state) => state.persistedReducer.cart);
-    console.log(cart);
-    
     const { currentUser } = useSelector((state) => state.persistedReducer.user);
 
-
     const navigate = useNavigate();
-
     const dispatch = useDispatch();
 
     const handleClick = () => {
-
-        console.log(currentUser);
 
         if( currentUser ){
             return navigate('/shipping')

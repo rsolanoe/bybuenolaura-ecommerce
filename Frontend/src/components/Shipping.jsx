@@ -24,10 +24,10 @@ const Shipping = () => {
         municipio: '',
     }
 
-    const [departamentos, setDepartamentos] = useState([])
-    const [municipios, setMunicipios] = useState([])
+    const [ departamentos, setDepartamentos ] = useState([]) // This state to store departamentos coming from the API call
+    const [ municipios, setMunicipios ] = useState([]) // This state to store municipios coming from the API call
 
-    const [formValues, setFormValues] = useState(user || initialState)
+    const [formValues, setFormValues] = useState( JSON.stringify(user) !== '{}' && user || initialState )
     const { name, lastName, phoneNumber, address, neighborhood, departamento, municipio } = formValues
 
     useEffect(() => {

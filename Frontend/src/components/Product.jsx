@@ -1,8 +1,10 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { mobile } from "../responsive";
+import { memo } from "react";
 
-const Product = ({ item }) => {
+const Product = memo(({ item }) => {
+    console.log('TEST RENDER');
 
     return (
         <Container>
@@ -22,7 +24,7 @@ const Product = ({ item }) => {
             </Link>
         </Container>
     );
-};
+});
 
 const Container = styled.div`
     

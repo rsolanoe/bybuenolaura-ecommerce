@@ -13,13 +13,10 @@ import { mobile } from "../responsive";
 
 const ProductInfo = () => {
     const { id } = useParams();
-    // const [product, setProduct] = useState({});
     const [amount, setAmount] = useState(1);
 
     const dispatch = useDispatch();
     const {product, isFetching, error} = useSelector(state => state.productDetail);
-
-    console.log(product);
 
     useEffect(() => {
         productDetails(dispatch, id)
